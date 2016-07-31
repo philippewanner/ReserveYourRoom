@@ -1,1 +1,1 @@
-CREATE TABLE users( email VARCHAR (50) primary key );
+CREATE TABLE USERS( email VARCHAR (50) primary key );

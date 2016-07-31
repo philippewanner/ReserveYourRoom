@@ -1,7 +1,7 @@
-package ch.reserveyourroom.controller;
+package ch.reserveyourroom.user.controller;
 
-import ch.reserveyourroom.model.User;
-import ch.reserveyourroom.service.UserService;
+import ch.reserveyourroom.user.model.User;
+import ch.reserveyourroom.user.service.UserService;
 
 import javax.inject.Inject;
 import javax.json.Json;

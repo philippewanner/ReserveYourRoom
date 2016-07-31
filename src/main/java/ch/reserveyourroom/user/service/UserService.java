@@ -1,6 +1,6 @@
-package ch.reserveyourroom.service;
+package ch.reserveyourroom.user.service;
 
-import ch.reserveyourroom.model.User;
+import ch.reserveyourroom.user.model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,5 +20,9 @@ public class UserService {
     public List<User> getAll() {
         TypedQuery<User> query = em.createQuery("select u from User u", User.class);
         return query.getResultList();
+    }
+
+    public void save(User user) {
+        em.persist(user);
     }
 }

@@ -1,4 +1,4 @@
-package ch.reserveyourroom.model;
+package ch.reserveyourroom.user.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {
 
     private String email;
