@@ -1,4 +1,4 @@
-package ch.reserveyourroom.user.controller;
+package ch.reserveyourroom.user.endpoint;
 
 import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.user.service.UserService;
@@ -12,10 +12,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 /**
- * Created by philippe.wanner on 19/07/16.
+ * Endpoint for the User ressource
  */
 @Path("/users")
-public class UserController {
+public class UserEndpoint {
 
     @Inject
     private UserService userService;
