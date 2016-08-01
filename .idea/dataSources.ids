@@ -29,9 +29,18 @@
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <key id="9" parent="3" name="PRIMARY">
+      <index id="9" parent="3" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
+        <columns>USER_EMAIL</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="10" parent="3" name="PRIMARY">
         <columns>USER_ID</columns>
         <primary>1</primary>
+      </key>
+      <key id="11" parent="3" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
+        <columns>USER_EMAIL</columns>
+        <underlying-index>UK_s0h89yn0ac8h7865cfsmfe9d9</underlying-index>
       </key>
     </database-model>
   </data-source>

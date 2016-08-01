@@ -1,17 +1,18 @@
 package ch.reserveyourroom.core;
 
 
-
+import ch.reserveyourroom.common.endpoint.Route;
+import ch.reserveyourroom.core.data.TestDataGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 
 /**
- * Created by philippe.wanner on 19/07/16.
+ * Application class that will be launch at first, at start-up.
  */
 
-@ApplicationPath("/api")
+@ApplicationPath(Route.API)
 public class Application extends javax.ws.rs.core.Application {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Application.class);
@@ -21,6 +22,9 @@ public class Application extends javax.ws.rs.core.Application {
         LOGGER.info("=======================");
         LOGGER.info("Application is starting");
         LOGGER.info("=======================");
+
+        // Fill the database with sample data
+        TestDataGenerator.getInstance().execute();
     }
 
 }

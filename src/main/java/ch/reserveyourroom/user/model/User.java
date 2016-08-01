@@ -3,9 +3,10 @@ package ch.reserveyourroom.user.model;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 
 import javax.persistence.*;
+import javax.validation.OverridesAttribute;
 
 /**
- * Created by philippe.wanner on 19/07/16.
+ * Entity that represent a user model.
  */
 
 @Entity
@@ -45,5 +46,11 @@ public class User extends AbstractEntity<Long> {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    @Override
+    public String toString() {
+
+        return "User [id=" + getId() + "name=" + firstname + " " + lastname + " email=" + email + "]";
     }
 }

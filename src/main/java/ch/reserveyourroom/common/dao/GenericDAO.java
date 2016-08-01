@@ -3,6 +3,7 @@ package ch.reserveyourroom.common.dao;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.common.exception.ReserveYourRoomOptimisticLockException;
 
+import javax.persistence.criteria.Predicate;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +13,14 @@ import java.util.Optional;
  * Interface that defines the CRUD operations that can perform each entity.
  * @param <T> The given entity to perform the operations on.
  */
-public interface GenericDAO<T extends AbstractEntity<PK>, PK extends Serializable> {
+public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializable> {
 
     /**
-     * Count the number of entries from a table that meet some criteria (where clause params)
-     * @param params sql paramaters
+     * Count the number of entries from a table that meet some criteria (predicate)
+     * @param predicate a predicate to meet
      * @return the number of records meeting the criteria.
      */
-    long countAll(Map<String, Object> params);
+    long countAll(Predicate predicate);
 
     /**
      * Load and return all entities from the database corresponding to this entity.

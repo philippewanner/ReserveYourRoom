@@ -69,4 +69,6 @@ public abstract class AbstractEntity<PK extends Serializable> {
         }
         return true;
     }
+
+    public abstract String toString();
 }
