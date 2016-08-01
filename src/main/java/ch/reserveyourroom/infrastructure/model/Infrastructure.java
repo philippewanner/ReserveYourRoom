@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "INFRASTRUCTURE")
+@Table(name = "INFRASTRUCTURES")
 @SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_INFRASTRUCTURE")
 @AttributeOverride(name = "id", column = @Column(name = "INFRASTRUCTURE_ID"))
 public class Infrastructure extends AbstractEntity<Long> {

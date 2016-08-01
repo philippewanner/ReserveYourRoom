@@ -2,11 +2,14 @@ package ch.reserveyourroom.room.model;
 
 import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import java.util.List;
 
 /**
  * Entity that represent a room model.
@@ -33,6 +36,11 @@ public class Room extends AbstractEntity<Long> {
     @NotNull
     @Column(name = "ROOM_FLOOR", nullable = false)
     private Integer floor;
+
+    @Nullable
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "INFRASTRUCTURE_ID")
+    private List<Infrastructure> infrastructures;
 
     @Override
     public String toString() {

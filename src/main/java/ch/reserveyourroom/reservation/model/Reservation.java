@@ -1,6 +1,7 @@
 package ch.reserveyourroom.reservation.model;
 
 import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.room.model.Room;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "RESERVATION")
+@Table(name = "RESERVATIONS")
 @SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_RESERVATION")
 @AttributeOverride(name = "id", column = @Column(name = "RESERVATION_ID"))
 public class Reservation extends AbstractEntity<Long> {
@@ -23,6 +24,11 @@ public class Reservation extends AbstractEntity<Long> {
     @NotNull
     @Column(name = "RESERVATION_END", nullable = false)
     private Date end;
+
+    @NotNull
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ROOM_ID")
+    private Room room;
 
     @Override
     public String toString() {
