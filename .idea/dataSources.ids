@@ -8,19 +8,31 @@
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
       <schema id="1" name="reserveyourroomdb"/>
-      <table id="2" parent="1" name="USERS"/>
-      <table id="3" parent="1" name="SQ_USERS"/>
-      <column id="4" parent="2" name="email">
-        <mandatory>1</mandatory>
-        <data-type>varchar(50)</data-type>
-      </column>
-      <key id="5" parent="2" name="PRIMARY">
-        <columns>email</columns>
-        <primary>1</primary>
-      </key>
-      <column id="6" parent="3" name="next_val">
+      <table id="2" parent="1" name="SQ_USERS"/>
+      <table id="3" parent="1" name="USERS"/>
+      <column id="4" parent="2" name="next_val">
         <data-type>bigint(20)</data-type>
       </column>
+      <column id="5" parent="3" name="USER_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="6" parent="3" name="USER_EMAIL">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="7" parent="3" name="USER_FIRSTNAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="8" parent="3" name="USER_LASTNAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="9" parent="3" name="PRIMARY">
+        <columns>USER_ID</columns>
+        <primary>1</primary>
+      </key>
     </database-model>
   </data-source>
 </component>

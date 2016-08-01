@@ -20,7 +20,7 @@ public class User extends AbstractEntity<Long> {
     @Column(name = "USER_LASTNAME", nullable = false)
     private String lastname;
 
-    @Column(name = "USER_EMAIL", nullable = false)
+    @Column(name = "USER_EMAIL", nullable = false, unique = true)
     private String email;
 
     public String getEmail() {

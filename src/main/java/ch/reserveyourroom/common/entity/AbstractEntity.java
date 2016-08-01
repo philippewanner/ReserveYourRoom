@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,6 +19,7 @@ public abstract class AbstractEntity<PK extends Serializable> {
 
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR)
     private PK id;
 
