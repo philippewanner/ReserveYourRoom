@@ -9,8 +9,8 @@
         <jta-data-source>java:/MySqlDS</jta-data-source>
 
         <properties>
-            <!-- Configuring JDBC properties -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/reserveyourroomdb" />
+            <!-- Configuring JDBC properties and create database if it does not exist -->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/reserveyourroomdb?createDatabaseIfNotExist=true" />-->
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
             <!-- Create script -->
             <property name="javax.persistence.schema-generation.create-source" value="script" />
@@ -20,6 +20,9 @@
             <property name="javax.persistence.schema-generation.drop-script-source" value="META-INF/sql/drop.sql" />
             <!-- Load script -->
             <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/load.sql" />
+            <!-- Dialect -->
+            <!-- Automatically create tables (not the database!) -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
     </persistence-unit>
 </persistence>
