@@ -24,8 +24,8 @@ public class Application extends javax.ws.rs.core.Application {
         LOGGER.info("=======================");
 
         // Fill the database with sample data
-        LOGGER.info("Generating test data...");
-        TestDataGenerator.getInstance().execute();
+        //LOGGER.info("Generating test data...");
+        //TestDataGenerator.getInstance().execute();
 
         LOGGER.info("=======================");
         LOGGER.info("Application has started");

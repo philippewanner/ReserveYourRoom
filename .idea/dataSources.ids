@@ -8,39 +8,194 @@
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
       <schema id="1" name="reserveyourroomdb"/>
-      <table id="2" parent="1" name="SQ_USERS"/>
-      <table id="3" parent="1" name="USERS"/>
-      <column id="4" parent="2" name="next_val">
-        <data-type>bigint(20)</data-type>
-      </column>
-      <column id="5" parent="3" name="USER_ID">
+      <table id="2" parent="1" name="ADDRESSES"/>
+      <table id="3" parent="1" name="SQ_ADDRESSES"/>
+      <table id="4" parent="1" name="BUILDINGS"/>
+      <table id="5" parent="1" name="SQ_BUILDING"/>
+      <table id="6" parent="1" name="SQ_USERS"/>
+      <table id="7" parent="1" name="USERS"/>
+      <table id="8" parent="1" name="ROOMS"/>
+      <table id="9" parent="1" name="SQ_ROOM"/>
+      <table id="10" parent="1" name="INFRASTRUCTURE"/>
+      <table id="11" parent="1" name="RESERVATION"/>
+      <table id="12" parent="1" name="SQ_INFRASTRUCTURE"/>
+      <table id="13" parent="1" name="SQ_RESERVATION"/>
+      <table id="14" parent="1" name="SQ_WHISH"/>
+      <table id="15" parent="1" name="WHISH"/>
+      <column id="16" parent="2" name="ADDRESS_ID">
         <mandatory>1</mandatory>
         <data-type>bigint(20)</data-type>
       </column>
-      <column id="6" parent="3" name="USER_EMAIL">
+      <column id="17" parent="2" name="ADDRESS_CITY">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="7" parent="3" name="USER_FIRSTNAME">
+      <column id="18" parent="2" name="ADDRESS_COUNTRY">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="8" parent="3" name="USER_LASTNAME">
+      <column id="19" parent="2" name="ADDRESS_HOUSENUM">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="20" parent="2" name="ADDRESS_STATE">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="21" parent="2" name="ADDRESS_STREET">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <index id="9" parent="3" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
+      <column id="22" parent="2" name="ADDRESS_ZIPCODE">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="23" parent="2" name="PRIMARY">
+        <columns>ADDRESS_ID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="24" parent="3" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="25" parent="4" name="BUILDING_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="26" parent="4" name="BUILDING_NAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="27" parent="4" name="ADDRESS_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="28" parent="4" name="FKek35jgfg1w3ke8n91pjhy82cq">
+        <columns>ADDRESS_ID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="29" parent="4" name="PRIMARY">
+        <columns>BUILDING_ID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="30" parent="4" name="FKek35jgfg1w3ke8n91pjhy82cq">
+        <columns>ADDRESS_ID</columns>
+        <ref-key>~.ADDRESSES.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="31" parent="5" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="32" parent="6" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="33" parent="7" name="USER_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="34" parent="7" name="USER_EMAIL">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="35" parent="7" name="USER_FIRSTNAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="36" parent="7" name="USER_LASTNAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="37" parent="7" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
         <columns>USER_EMAIL</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="10" parent="3" name="PRIMARY">
+      <key id="38" parent="7" name="PRIMARY">
         <columns>USER_ID</columns>
         <primary>1</primary>
       </key>
-      <key id="11" parent="3" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
+      <key id="39" parent="7" name="UK_s0h89yn0ac8h7865cfsmfe9d9">
         <columns>USER_EMAIL</columns>
         <underlying-index>UK_s0h89yn0ac8h7865cfsmfe9d9</underlying-index>
+      </key>
+      <column id="40" parent="8" name="ROOM_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="41" parent="8" name="ROOM_FLOOR">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="42" parent="8" name="ROOM_NAME">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="43" parent="8" name="ROOM_SEATNUMBER">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="44" parent="8" name="ROOM_SIZE">
+        <mandatory>1</mandatory>
+        <data-type>float</data-type>
+      </column>
+      <key id="45" parent="8" name="PRIMARY">
+        <columns>ROOM_ID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="46" parent="8" name="FKsui732isrijh6l4vlh3fjf9cx">
+        <columns>ROOM_ID</columns>
+        <ref-key>~.BUILDINGS.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="47" parent="9" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="48" parent="10" name="INFRASTRUCTURE_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="49" parent="10" name="PRIMARY">
+        <columns>INFRASTRUCTURE_ID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="50" parent="11" name="RESERVATION_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="51" parent="11" name="RESERVATION_END">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="52" parent="11" name="RESERVATION_START">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <key id="53" parent="11" name="PRIMARY">
+        <columns>RESERVATION_ID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="54" parent="12" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="55" parent="13" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="56" parent="14" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="57" parent="15" name="WHISH_ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="58" parent="15" name="WHISH_END">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="59" parent="15" name="WHISH_START">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <key id="60" parent="15" name="PRIMARY">
+        <columns>WHISH_ID</columns>
+        <primary>1</primary>
       </key>
     </database-model>
   </data-source>
