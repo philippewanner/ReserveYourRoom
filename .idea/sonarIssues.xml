@@ -28,7 +28,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/dao/AddressDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/dao/impl/AddressDaoImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/dao/impl/BuildingDaoImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/model/Address.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/dao/Building.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/dao/BuildingDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/dao/impl/BuildingDaoImpl.java">
           <value>
             <set />
           </value>
@@ -123,6 +153,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/dao/InfrastructureDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/dao/impl/InfrastructureDaoImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/dao/impl/ReservationDaoImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/model/Infrastructure.java">
           <value>
             <set />
@@ -133,7 +178,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/dao/ReservationDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/dao/impl/ReservationDaoImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/model/Reservation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/dao/RoomDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/dao/UserDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/dao/impl/RoomDaoImpl.java">
           <value>
             <set />
           </value>
@@ -169,6 +239,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/user/service/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/dao/WishDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/dao/impl/WishDaoImpl.java">
           <value>
             <set />
           </value>

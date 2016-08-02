@@ -25,7 +25,7 @@ public class Building extends AbstractEntity<Long> {
     @NotNull
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="ROOM_ID")
-    List<Room> rooms;
+    private List<Room> rooms;
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -37,5 +37,29 @@ public class Building extends AbstractEntity<Long> {
     public String toString() {
 
         return "Building [id=" + getId() + ", name=" + name + "]";
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "RESERVATIONS")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_RESERVATION")
+@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_RESERVATIONS")
 @AttributeOverride(name = "id", column = @Column(name = "RESERVATION_ID"))
 public class Reservation extends AbstractEntity<Long> {
 

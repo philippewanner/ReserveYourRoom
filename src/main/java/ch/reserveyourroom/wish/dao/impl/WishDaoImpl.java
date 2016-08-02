@@ -1,25 +1,26 @@
-package ch.reserveyourroom.user.dao.impl;
+package ch.reserveyourroom.wish.dao.impl;
 
 import ch.reserveyourroom.common.dao.impl.GenericDaoImpl;
-import ch.reserveyourroom.user.dao.UserDao;
-import ch.reserveyourroom.user.model.User;
+import ch.reserveyourroom.wish.dao.WishDao;
+import ch.reserveyourroom.wish.model.Wish;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class UserDaoImpl extends GenericDaoImpl<User, Long> implements UserDao {
+public class WishDaoImpl extends GenericDaoImpl<Wish, Long> implements WishDao {
 
-    public List<User> findByFirstname(String firstname) {
+    public List<Wish> findByEnd(Date end) {
         throw new NotImplementedException(); //@TODO: to implement
     }
 
-    public List<User> findByLastname(String firstname) {
+    public List<Wish> findByStart(Date start) {
         throw new NotImplementedException(); //@TODO: to implement
     }
 
-    public List<User> findByEmail(String firstname) {
+    public List<Wish> findByRoomId(Long roomId) {
         throw new NotImplementedException(); //@TODO: to implement
     }
 }

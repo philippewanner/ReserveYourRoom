@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "WHISHES")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_WHISH")
+@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_WHISHS")
 @AttributeOverride(name = "id", column = @Column(name = "WHISH_ID"))
 public class Wish extends AbstractEntity<Long> {
 
@@ -54,5 +54,56 @@ public class Wish extends AbstractEntity<Long> {
     public String toString() {
 
         return "Whish [id=" + getId() + ", start=" + start + ", end=" + end + "]";
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getStart(){
+        return this.start;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Date getEnd(){
+        return this.end;
+    }
+
+    @Nullable
+    public List<Infrastructure> getInfrastructures() {
+        return infrastructures;
+    }
+
+    public void setInfrastructures(@Nullable List<Infrastructure> infrastructures) {
+        this.infrastructures = infrastructures;
+    }
+
+    @Nullable
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(@Nullable Address address) {
+        this.address = address;
+    }
+
+    @Nullable
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(@Nullable Building building) {
+        this.building = building;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
