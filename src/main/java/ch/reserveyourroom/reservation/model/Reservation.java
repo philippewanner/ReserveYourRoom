@@ -6,6 +6,7 @@ import ch.reserveyourroom.room.model.Room;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Entity that represent a reservation model.
@@ -34,5 +35,20 @@ public class Reservation extends AbstractEntity<Long> {
     public String toString() {
 
         return "Reservation [id=" + getId() + ", start=" + start + ", end=" + end + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof Reservation)) return false;
+
+        Reservation other = (Reservation) o;
+        return Objects.equals(this.getId(), other.getId()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
+
     }
 }

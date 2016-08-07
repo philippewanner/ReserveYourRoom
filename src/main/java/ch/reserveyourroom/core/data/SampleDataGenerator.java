@@ -1,7 +1,9 @@
 package ch.reserveyourroom.core.data;
 
+import ch.reserveyourroom.common.exception.persistence.PersistenceException;
+import ch.reserveyourroom.common.exception.persistence.EntityUnprocessableException;
 import ch.reserveyourroom.user.model.User;
-import ch.reserveyourroom.user.service.UserService;
+import ch.reserveyourroom.user.service.impl.UserServiceImpl;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.person.Person;
 import org.slf4j.Logger;
@@ -20,25 +22,25 @@ import javax.inject.Inject;
 
 @Singleton
 @Startup
-public class TestDataGenerator {
+public class SampleDataGenerator {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(TestDataGenerator.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(SampleDataGenerator.class);
 
     @Inject
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
-    private static TestDataGenerator instance;
+    private static SampleDataGenerator instance;
 
 
     @PostConstruct
     public void initialize() {
 
-        TestDataGenerator.instance = this;
+        SampleDataGenerator.instance = this;
     }
 
-    public static TestDataGenerator getInstance() {
+    public static SampleDataGenerator getInstance() {
 
-        return TestDataGenerator.instance;
+        return SampleDataGenerator.instance;
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -53,7 +55,7 @@ public class TestDataGenerator {
         }
     }
 
-    private void createUsers() {
+    private void createUsers() throws PersistenceException {
 
         for (int i = 0; i < 1000; i++) {
 
@@ -66,7 +68,7 @@ public class TestDataGenerator {
             user.setFirstname(person.firstName());
             user.setLastname(person.lastName());
             user.setEmail(person.companyEmail());
-            userService.save(user);
+            userServiceImpl.save(user);
         }
     }
 }

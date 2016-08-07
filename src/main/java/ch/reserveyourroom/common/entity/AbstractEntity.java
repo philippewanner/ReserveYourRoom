@@ -33,42 +33,9 @@ public abstract class AbstractEntity<PK extends Serializable> {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
+    public abstract int hashCode();
 
-        if (getId() != null) {
-
-            return getId().hashCode();
-        }
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) {
-
-            return true;
-        }
-        if (obj == null) {
-
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-
-            return false;
-        }
-        AbstractEntity<?> other = (AbstractEntity<?>) obj;
-        if (getId() == null || other.getId() == null) {
-
-            return false;
-        }
-        if (!getId().equals(other.getId())) {
-
-            return false;
-        }
-        return true;
-    }
+    public abstract boolean equals(Object obj);
 
     public abstract String toString();
 }

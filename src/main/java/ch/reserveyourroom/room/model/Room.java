@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity that represent a room model.
@@ -86,5 +87,20 @@ public class Room extends AbstractEntity<Long> {
 
     public void setInfrastructures(@Nullable List<Infrastructure> infrastructures) {
         this.infrastructures = infrastructures;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof Room)) return false;
+
+        Room other = (Room) o;
+        return Objects.equals(this.getId(), other.getId()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor)) && this.infrastructures != null && this.infrastructures.equals(other.infrastructures);
+
     }
 }

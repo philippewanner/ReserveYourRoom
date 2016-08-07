@@ -2,8 +2,10 @@ package ch.reserveyourroom.common.dao.impl;
 
 import ch.reserveyourroom.common.dao.GenericDao;
 import ch.reserveyourroom.common.entity.AbstractEntity;
-import ch.reserveyourroom.common.exception.ReserveYourRoomOptimisticLockException;
+import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import org.slf4j.Logger;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
@@ -22,13 +24,19 @@ public abstract class GenericDaoImpl<T extends AbstractEntity<PK>, PK extends Se
     @PersistenceContext
     protected EntityManager em;
 
+    @Inject
+    Logger logger;
+
     private Class<T> entityClass;
+
+    private Class<PK> idClass;
 
     public GenericDaoImpl(){
 
         Type type = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) type;
-        entityClass = (Class) pt.getActualTypeArguments()[0];
+        entityClass = (Class<T>) pt.getActualTypeArguments()[0];
+        idClass = (Class<PK>) pt.getActualTypeArguments()[1];
     }
 
     public long countAll(final Predicate predicate) {
@@ -59,15 +67,15 @@ public abstract class GenericDaoImpl<T extends AbstractEntity<PK>, PK extends Se
 
     public Optional<T> read(final PK id) {
 
-        return Optional.ofNullable((T) this.em.find(entityClass, id));
+        return Optional.ofNullable(this.em.find(entityClass, id));
     }
 
-    public T update(final T t) throws ReserveYourRoomOptimisticLockException {
+    public T update(final T t) throws EntityOptimisticLockException {
 
         try {
             return this.em.merge(t);
         } catch (OptimisticLockException e) {
-            throw new ReserveYourRoomOptimisticLockException(t);
+            throw new EntityOptimisticLockException(t, e);
         }
     }
 }

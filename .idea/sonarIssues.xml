@@ -43,7 +43,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/endpoint/AddressEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/model/Address.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/service/AddressService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/address/service/impl/AddressServiceImpl.java">
           <value>
             <set />
           </value>
@@ -63,7 +78,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/endpoint/BuildingEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/model/Building.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/service/BuildingService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/building/service/impl/BuildingServiceImpl.java">
           <value>
             <set />
           </value>
@@ -88,7 +118,42 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/ErrorResponseFactory.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/GenericEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/HttpResponseFactory.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/HttpStatusCode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/ResponseFactory.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/Route.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/Routes.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/endpoint/impl/GenericEndpointImpl.java">
           <value>
             <set />
           </value>
@@ -108,12 +173,197 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/CustomException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/PhysioQMapEntityUnprocessableException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/PhysioQMapUnprocessableEntityException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomEntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomException.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomOptimisticLockException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomTechnicalException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/ReserveYourRoomUnprocessableEntityException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/TechnicalException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/business/BusinessException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/business/BusinessObjectNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/business/BusinessOperation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/business/BusinessUnprocessableOperationException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/business/ObjectNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/data/EntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/data/EntityOptimisticLockException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/data/EntityUnprocessableException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/data/PersistenceException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/data/TechnicalException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/EntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/EntityOptimisticLockException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/ReserveYourRoomEntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/ReserveYourRoomOptimisticLockException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/ReserveYourRoomUnprocessableEntityException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/model/UnprocessableEntityException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/persistence/EntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/persistence/EntityUnprocessableException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/persistence/PersistenceException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/EntityNotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/EntityOptimisticLockException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/EntityUnprocessableException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/ReserveYourRoomTechnicalException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/TechnicalException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/exception/technical/UnprocessableEntityException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/service/GenericService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/service/impl/AbstractGenericService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/service/impl/GenericService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/service/impl/GenericServiceImpl.java">
           <value>
             <set />
           </value>
@@ -168,7 +418,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/endpoint/InfrastructureEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/model/Infrastructure.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/service/InfrastructureService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/infrastructure/service/impl/InfrastructureServiceImpl.java">
           <value>
             <set />
           </value>
@@ -188,7 +453,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/endpoint/ReservationEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/model/Reservation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/service/ReservationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/service/impl/ReservationDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/reservation/service/impl/ReservationServiceImpl.java">
           <value>
             <set />
           </value>
@@ -208,7 +493,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/endpoint/RoomEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/model/Room.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/service/RoomService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/room/service/impl/RoomServiceImpl.java">
           <value>
             <set />
           </value>
@@ -243,6 +543,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/user/service/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/user/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/dao/WishDao.java">
           <value>
             <set />
@@ -253,7 +563,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/endpoint/WishEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/model/Wish.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/service/WishService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/wish/service/impl/WishServiceImpl.java">
           <value>
             <set />
           </value>

@@ -1,12 +1,11 @@
 package ch.reserveyourroom.common.dao;
 
 import ch.reserveyourroom.common.entity.AbstractEntity;
-import ch.reserveyourroom.common.exception.ReserveYourRoomOptimisticLockException;
+import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 
 import javax.persistence.criteria.Predicate;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -24,7 +23,7 @@ public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializabl
 
     /**
      * Load and return all entities from the database corresponding to this entity.
-     * @return
+     * @return list of all entities found
      */
     List<T> loadAll();
 
@@ -54,6 +53,6 @@ public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializabl
      * @param t the transient object to update.
      * @return the old state of the object before the update.
      */
-    T update(T t) throws ReserveYourRoomOptimisticLockException;
+    T update(T t) throws EntityOptimisticLockException;
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity that represent a whish model.
@@ -49,6 +50,21 @@ public class Wish extends AbstractEntity<Long> {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ROOM_ID")
     private Room room;
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof Wish)) return false;
+
+        Wish other = (Wish) o;
+        return Objects.equals(this.getId(), other.getId()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && (this.infrastructures != null && this.infrastructures.equals(other.infrastructures)) && (this.address != null && this.address.equals(other.address)) && (this.building != null && this.building.equals(other.building)) && this.room != null && this.room.equals(other.room);
+
+    }
 
     @Override
     public String toString() {

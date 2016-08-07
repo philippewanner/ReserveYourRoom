@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.OverridesAttribute;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity that represent a user model.
@@ -88,5 +89,20 @@ public class User extends AbstractEntity<Long> {
     @Nullable
     public List<Reservation> getReservations() {
         return reservations;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof User)) return false;
+
+        User other = (User) o;
+        return Objects.equals(this.getId(), other.getId()) && (this.firstname != null && this.firstname.equals(other.firstname)) && (this.lastname != null && this.lastname.equals(other.lastname)) && (this.email != null && this.email.equals(other.email)) && (this.whishes != null && this.whishes.equals(other.whishes)) && this.reservations != null && this.reservations.equals(other.reservations);
+
     }
 }

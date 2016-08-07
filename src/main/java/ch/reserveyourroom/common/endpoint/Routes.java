@@ -1,9 +1,9 @@
 package ch.reserveyourroom.common.endpoint;
 
 /**
- * Route for the REST interfaces. These are constants.
+ * Routes for the REST interfaces. These are constants.
  */
-public interface Route {
+public interface Routes {
 
     String API = "api";
     String USER = "user";
@@ -17,4 +17,5 @@ public interface Route {
     String WHITEBOARD = "whiteboard";
     String FLIPCHART = "flipchart";
     String SOCKET = "socket";
+    String PING = "ping";
 }

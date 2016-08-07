@@ -5,6 +5,7 @@ import ch.reserveyourroom.common.entity.AbstractEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Entity that represent a reservation model.
@@ -20,5 +21,20 @@ public class Infrastructure extends AbstractEntity<Long> {
     public String toString() {
 
         return "Infrastructure [id=" + getId() + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == null) return false;
+        if(!(o instanceof Infrastructure)) return false;
+
+        Infrastructure other = (Infrastructure) o;
+        return Objects.equals(this.getId(), other.getId());
+
     }
 }

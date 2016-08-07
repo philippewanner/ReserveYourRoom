@@ -7,6 +7,7 @@ import ch.reserveyourroom.room.model.Room;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entity that represent a building model.
@@ -61,5 +62,20 @@ public class Building extends AbstractEntity<Long> {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof Building)) return false;
+
+        Building other = (Building) o;
+        return Objects.equals(this.getId(), other.getId()) && (this.name != null && this.name.equals(other.name)) && (this.rooms != null && this.rooms.equals(other.rooms)) && this.address != null && this.address.equals(other.address);
+
     }
 }
