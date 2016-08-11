@@ -7,6 +7,7 @@ import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
 import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.address.service.AddressService;
+import ch.reserveyourroom.common.logger.Log;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -29,7 +30,7 @@ public class AddressEndpoint implements GenericEndpoint<Address> {
     @Inject
     private AddressService service;
 
-    @Inject
+    @Log
     private Logger logger;
 
     @GET

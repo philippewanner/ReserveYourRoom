@@ -7,6 +7,8 @@ import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.building.service.BuildingService;
+import ch.reserveyourroom.common.logger.Log;
+import ch.reserveyourroom.common.logger.LoggerInjector;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -29,7 +31,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
     @Inject
     private BuildingService service;
 
-    @Inject
+    @Log
     private Logger logger;
 
     @GET

@@ -3,6 +3,7 @@ package ch.reserveyourroom.common.dao.impl;
 import ch.reserveyourroom.common.dao.GenericDao;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import ch.reserveyourroom.common.logger.Log;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -24,8 +25,8 @@ public abstract class GenericDaoImpl<T extends AbstractEntity<PK>, PK extends Se
     @PersistenceContext
     protected EntityManager em;
 
-    @Inject
-    Logger logger;
+    @Log
+    private Logger log;
 
     private Class<T> entityClass;
 

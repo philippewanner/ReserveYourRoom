@@ -5,6 +5,7 @@ import ch.reserveyourroom.common.endpoint.ResponseFactory;
 import ch.reserveyourroom.common.endpoint.Routes;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
+import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.room.model.Room;
 import ch.reserveyourroom.room.service.RoomService;
 import org.slf4j.Logger;
@@ -29,8 +30,8 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
     @Inject
     private RoomService service;
 
-    @Inject
-    private Logger logger;
+    @Log
+    private Logger log;
 
     @GET
     @Path(Routes.PING)

@@ -348,6 +348,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/logger/Log.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/logger/Logger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/logger/LoggerInjector.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/logger/LoggerProducer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ch/reserveyourroom/common/service/GenericService.java">
           <value>
             <set />

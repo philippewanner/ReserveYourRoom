@@ -3,6 +3,7 @@ package ch.reserveyourroom.user.service.impl;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.user.dao.UserDao;
 import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.user.service.UserService;
@@ -20,7 +21,8 @@ import java.util.Optional;
 @Stateless
 public class UserServiceImpl implements UserService {
 
-    private Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    @Log
+    private Logger logger;
 
     @Inject
     private UserDao userDao;

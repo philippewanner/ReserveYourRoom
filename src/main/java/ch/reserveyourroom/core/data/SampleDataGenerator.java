@@ -1,13 +1,13 @@
 package ch.reserveyourroom.core.data;
 
 import ch.reserveyourroom.common.exception.persistence.PersistenceException;
-import ch.reserveyourroom.common.exception.persistence.EntityUnprocessableException;
+import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.user.model.User;
+import ch.reserveyourroom.user.service.UserService;
 import ch.reserveyourroom.user.service.impl.UserServiceImpl;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.person.Person;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -24,10 +24,11 @@ import javax.inject.Inject;
 @Startup
 public class SampleDataGenerator {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(SampleDataGenerator.class);
+    @Log
+    private Logger logger;
 
     @Inject
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     private static SampleDataGenerator instance;
 
@@ -51,7 +52,7 @@ public class SampleDataGenerator {
             createUsers();
 
         } catch (Exception e) {
-            LOGGER.error("Error when creating the sample data at start-up", e);
+            logger.error("Error when creating the sample data at start-up", e);
         }
     }
 
@@ -68,7 +69,7 @@ public class SampleDataGenerator {
             user.setFirstname(person.firstName());
             user.setLastname(person.lastName());
             user.setEmail(person.companyEmail());
-            userServiceImpl.save(user);
+            userService.save(user);
         }
     }
 }

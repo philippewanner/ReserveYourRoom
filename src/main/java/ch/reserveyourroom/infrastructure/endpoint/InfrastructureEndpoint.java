@@ -5,6 +5,7 @@ import ch.reserveyourroom.common.endpoint.ResponseFactory;
 import ch.reserveyourroom.common.endpoint.Routes;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
+import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import ch.reserveyourroom.infrastructure.service.InfrastructureService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class InfrastructureEndpoint implements GenericEndpoint<Infrastructure> {
     @Inject
     private InfrastructureService service;
 
-    @Inject
+    @Log
     private Logger logger;
 
     @GET

@@ -5,10 +5,9 @@ import ch.reserveyourroom.common.endpoint.ResponseFactory;
 import ch.reserveyourroom.common.endpoint.Routes;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
-import ch.reserveyourroom.user.model.User;
+import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.wish.model.Wish;
 import ch.reserveyourroom.wish.service.WishService;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -31,8 +30,8 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
     @Inject
     private WishService service;
 
-    @Inject
-    private Logger logger;
+    @Log
+    private Logger log;
 
     @GET
     @Path(Routes.PING)
