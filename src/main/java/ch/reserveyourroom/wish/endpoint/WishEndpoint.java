@@ -5,7 +5,6 @@ import ch.reserveyourroom.common.endpoint.ResponseFactory;
 import ch.reserveyourroom.common.endpoint.Routes;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
-import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.wish.model.Wish;
 import ch.reserveyourroom.wish.service.WishService;
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
     @Inject
     private WishService service;
 
-    @Log
+    @Inject
     private Logger log;
 
     @GET

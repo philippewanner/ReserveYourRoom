@@ -1,7 +1,7 @@
 package ch.reserveyourroom.core.data;
 
 import ch.reserveyourroom.common.exception.persistence.PersistenceException;
-import ch.reserveyourroom.common.logger.Log;
+import ch.reserveyourroom.user.dao.UserDao;
 import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.user.service.UserService;
 import ch.reserveyourroom.user.service.impl.UserServiceImpl;
@@ -24,14 +24,13 @@ import javax.inject.Inject;
 @Startup
 public class SampleDataGenerator {
 
-    @Log
+    @Inject
     private Logger logger;
 
     @Inject
     private UserService userService;
 
     private static SampleDataGenerator instance;
-
 
     @PostConstruct
     public void initialize() {

@@ -17,7 +17,6 @@ public abstract class AbstractEntity<PK extends Serializable> {
 
     public static final String GENERATOR = "ASSIGNED_SEQUENCE";
 
-
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR)

@@ -93,6 +93,7 @@ public class User extends AbstractEntity<Long> {
 
     @Override
     public int hashCode() {
+
         return getId().hashCode();
     }
 

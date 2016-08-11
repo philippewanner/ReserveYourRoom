@@ -3,13 +3,11 @@ package ch.reserveyourroom.user.service.impl;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
-import ch.reserveyourroom.common.logger.Log;
 import ch.reserveyourroom.user.dao.UserDao;
 import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.user.service.UserService;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -21,7 +19,7 @@ import java.util.Optional;
 @Stateless
 public class UserServiceImpl implements UserService {
 
-    @Log
+    @Inject
     private Logger logger;
 
     @Inject
