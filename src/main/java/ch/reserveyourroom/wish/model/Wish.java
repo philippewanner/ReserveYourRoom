@@ -52,7 +52,14 @@ public class Wish extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getUuid().hashCode();
+
+        int hash = 1;
+        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 13 + (start != null ? start.hashCode() : 0);
+        hash = hash * 7 + (end != null ? end.hashCode() : 0);
+        hash = hash * 5 + (building != null ? building.hashCode() : 0);
+        hash = hash * 13 + (room != null ? room.hashCode() : 0);
+        return hash;
     }
 
     @Override

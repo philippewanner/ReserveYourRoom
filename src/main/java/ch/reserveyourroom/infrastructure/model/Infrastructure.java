@@ -22,7 +22,10 @@ public class Infrastructure extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getUuid().hashCode();
+
+        int hash = 1;
+        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        return hash;
     }
 
     @Override

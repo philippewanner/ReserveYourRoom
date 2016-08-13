@@ -90,7 +90,15 @@ public class Room extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getUuid().hashCode();
+
+        int hash = 1;
+        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 13 + (name != null ? name.hashCode() : 0);
+        hash = hash * 7 + (size != null ? size.hashCode() : 0);
+        hash = hash * 5 + (seatnumber != null ? seatnumber.hashCode() : 0);
+        hash = hash * 13 + (floor != null ? floor.hashCode() : 0);
+        hash = hash * 3 + (infrastructures != null ? infrastructures.hashCode() : 0);
+        return hash;
     }
 
     @Override

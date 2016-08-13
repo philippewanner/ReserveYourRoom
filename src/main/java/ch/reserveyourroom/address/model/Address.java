@@ -97,7 +97,16 @@ public class Address extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getUuid().hashCode();
+
+        int hash = 1;
+        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 29 + (street != null ? street.hashCode() : 0);
+        hash = hash * 7 + (city != null ? city.hashCode() : 0);
+        hash = hash * 5 + (state != null ? state.hashCode() : 0);
+        hash = hash * 17 + (zipcode != null ? zipcode.hashCode() : 0);
+        hash = hash * 13 + (country != null ? country.hashCode() : 0);
+        hash = hash * 23 + (housenumber != null ? housenumber.hashCode() : 0);
+        return hash;
     }
 
     @Override

@@ -65,7 +65,13 @@ public class Building extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getUuid().hashCode();
+
+        int hash = 1;
+        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 13 + (name != null ? name.hashCode() : 0);
+        hash = hash * 7 + (rooms != null ? rooms.hashCode() : 0);
+        hash = hash * 5 + (address != null ? address.hashCode() : 0);
+        return hash;
     }
 
     @Override

@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -31,7 +30,7 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         Type type = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) type;
         entityClass = (Class<T>) pt.getActualTypeArguments()[0];
-        idClass = (Class<String>) pt.getActualTypeArguments()[1];
+        //idClass = (Class<String>) pt.getActualTypeArguments()[1];
     }
 
     public long countAll(final Predicate predicate) {
@@ -46,13 +45,13 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
     public List<T> loadAll() {
 
         Query query = em.createQuery("FROM " + entityClass.getName());
-        return query.getResultList();
+        return (List<T>) query.getResultList();
     }
 
     public String create(final T t) {
 
         this.em.persist(t);
-        return t.getId();
+        return t.getUuid().toString();
     }
 
     public void delete(final T id) {
