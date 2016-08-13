@@ -12,11 +12,12 @@
 
     <build>
         <!-- I do not want the version to be part of the generated WAR file name -->
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -48,6 +49,8 @@
             <artifactId>jsr311-api</artifactId>
             <version>1.1.1</version>
         </dependency>
+
+        <!-- Persistence -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -58,6 +61,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.1.Final</version>
         </dependency>
 
         <!-- Logging -->
@@ -78,11 +86,6 @@
             <groupId>io.codearte.jfairy</groupId>
             <artifactId>jfairy</artifactId>
             <version>0.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>3.2.8.RELEASE</version>
         </dependency>
 
 
