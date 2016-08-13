@@ -7,5 +7,5 @@ import ch.reserveyourroom.common.dao.impl.GenericDaoImpl;
 import javax.ejb.Stateless;
 
 @Stateless
-public class BuildingDaoImpl extends GenericDaoImpl<Building, Long> implements BuildingDao {
+public class BuildingDaoImpl extends GenericDaoImpl<Building> implements BuildingDao {
 }

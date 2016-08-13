@@ -9,5 +9,5 @@ import javax.ejb.Stateless;
  * Specific data access object for the Reservation entity.
  */
 @Stateless
-public interface ReservationDao extends GenericDao<Reservation, Long> {
+public interface ReservationDao extends GenericDao<Reservation> {
 }

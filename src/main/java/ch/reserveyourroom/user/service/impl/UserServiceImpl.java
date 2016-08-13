@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Inject
     private UserDao userDao;
 
-    public User find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public User find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<User> entity = this.userDao.read(key);
         if (entity.isPresent()) {
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Optional<User> search(@NotNull Long key) {
+    public Optional<User> search(@NotNull String key) {
 
         return this.userDao.read(key);
     }
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         return this.userDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid User user) {
+    public String save(@NotNull @Valid User user) {
 
         return this.userDao.create(user);
     }
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<User> t = this.userDao.read(id);
         if(t.isPresent()){

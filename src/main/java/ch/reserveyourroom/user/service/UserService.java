@@ -9,5 +9,5 @@ import javax.ejb.Stateless;
  * Specific method definition for the User service
  */
 @Stateless
-public interface UserService extends GenericService<User, Long> {
+public interface UserService extends GenericService<User> {
 }

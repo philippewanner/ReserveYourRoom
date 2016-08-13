@@ -6,5 +6,5 @@ import ch.reserveyourroom.common.service.GenericService;
 /**
  * Specific method definition for the Address service
  */
-public interface AddressService extends GenericService<Address, Long>{
+public interface AddressService extends GenericService<Address>{
 }

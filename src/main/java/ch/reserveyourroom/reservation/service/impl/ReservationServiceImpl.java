@@ -32,7 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Inject
     private ReservationDao reservationDao;
 
-    public Reservation find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Reservation find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Reservation> entity = this.reservationDao.read(key);
         if (entity.isPresent()) {
@@ -42,7 +42,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
-    public Optional<Reservation> search(@NotNull Long key) {
+    public Optional<Reservation> search(@NotNull String key) {
 
         return this.reservationDao.read(key);
     }
@@ -52,7 +52,7 @@ public class ReservationServiceImpl implements ReservationService {
         return this.reservationDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Reservation reservation) {
+    public String save(@NotNull @Valid Reservation reservation) {
 
         return this.reservationDao.create(reservation);
     }
@@ -67,7 +67,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Reservation> t = this.reservationDao.read(id);
         if(t.isPresent()){

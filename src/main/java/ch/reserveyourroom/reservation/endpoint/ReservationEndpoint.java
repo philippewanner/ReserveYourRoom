@@ -42,7 +42,7 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
     @POST
     public Response save(@NotNull final Reservation reservation) {
 
-        Long savedEntityId = this.service.save(reservation);
+        String savedEntityId = this.service.save(reservation);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final Reservation reservation = this.service.find(id);
@@ -69,7 +69,7 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final Reservation entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Reservation entity) {
 
         try {
             Reservation entityUpdated = this.service.update(entity);

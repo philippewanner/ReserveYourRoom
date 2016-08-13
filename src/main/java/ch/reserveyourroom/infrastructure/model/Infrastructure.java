@@ -13,9 +13,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "INFRASTRUCTURES")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_INFRASTRUCTURES")
 @AttributeOverride(name = "id", column = @Column(name = "INFRASTRUCTURE_ID"))
-public class Infrastructure extends AbstractEntity<Long> {
+public class Infrastructure extends AbstractEntity {
 
     @Override
     public String toString() {

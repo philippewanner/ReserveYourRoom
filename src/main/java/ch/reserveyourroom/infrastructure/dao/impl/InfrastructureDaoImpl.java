@@ -7,5 +7,5 @@ import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import javax.ejb.Stateless;
 
 @Stateless
-public class InfrastructureDaoImpl extends GenericDaoImpl<Infrastructure, Long> implements InfrastructureDao {
+public class InfrastructureDaoImpl extends GenericDaoImpl<Infrastructure> implements InfrastructureDao {
 }

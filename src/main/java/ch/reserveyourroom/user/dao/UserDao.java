@@ -10,7 +10,7 @@ import java.util.List;
  * Specific data access object for the User entity.
  */
 
-public interface UserDao extends GenericDao<User, Long> {
+public interface UserDao extends GenericDao<User> {
 
     List<User> findByFirstname(String firstname);
 

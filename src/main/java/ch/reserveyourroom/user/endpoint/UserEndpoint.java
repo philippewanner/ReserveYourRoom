@@ -42,7 +42,7 @@ public class UserEndpoint implements GenericEndpoint<User> {
     @POST
     public Response save(@NotNull final User user) {
 
-        Long savedEntityId = this.service.save(user);
+        String savedEntityId = this.service.save(user);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class UserEndpoint implements GenericEndpoint<User> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final User user = this.service.find(id);
@@ -69,7 +69,7 @@ public class UserEndpoint implements GenericEndpoint<User> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final User entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final User entity) {
 
         try {
             User entityUpdated = this.service.update(entity);

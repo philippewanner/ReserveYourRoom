@@ -26,7 +26,7 @@ public class WishServiceImpl implements WishService {
     @Inject
     private WishDao wishDao;
 
-    public Wish find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Wish find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Wish> entity = this.wishDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +36,7 @@ public class WishServiceImpl implements WishService {
         }
     }
 
-    public Optional<Wish> search(@NotNull Long key) {
+    public Optional<Wish> search(@NotNull String key) {
 
         return this.wishDao.read(key);
     }
@@ -46,7 +46,7 @@ public class WishServiceImpl implements WishService {
         return this.wishDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Wish wish) {
+    public String save(@NotNull @Valid Wish wish) {
 
         return this.wishDao.create(wish);
     }
@@ -61,7 +61,7 @@ public class WishServiceImpl implements WishService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Wish> t = this.wishDao.read(id);
         if(t.isPresent()){

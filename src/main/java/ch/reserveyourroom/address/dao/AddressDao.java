@@ -6,5 +6,5 @@ import ch.reserveyourroom.common.dao.GenericDao;
 /**
  * Specific data access object for the Address entity.
  */
-public interface AddressDao extends GenericDao<Address, Long> {
+public interface AddressDao extends GenericDao<Address> {
 }

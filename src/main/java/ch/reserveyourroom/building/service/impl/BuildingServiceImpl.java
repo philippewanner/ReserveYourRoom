@@ -32,7 +32,7 @@ public class BuildingServiceImpl implements BuildingService {
     @Inject
     private BuildingDao buildingDao;
 
-    public Building find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Building find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Building> entity = this.buildingDao.read(key);
         if (entity.isPresent()) {
@@ -42,7 +42,7 @@ public class BuildingServiceImpl implements BuildingService {
         }
     }
 
-    public Optional<Building> search(@NotNull Long key) {
+    public Optional<Building> search(@NotNull String key) {
 
         return this.buildingDao.read(key);
     }
@@ -52,7 +52,7 @@ public class BuildingServiceImpl implements BuildingService {
         return this.buildingDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Building building) {
+    public String save(@NotNull @Valid Building building) {
 
         return this.buildingDao.create(building);
     }
@@ -67,7 +67,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Building> t = this.buildingDao.read(id);
         if(t.isPresent()){

@@ -10,7 +10,7 @@ import java.util.List;
  * Specific data access object for the Wish entity.
  */
 
-public interface WishDao extends GenericDao<Wish, Long> {
+public interface WishDao extends GenericDao<Wish> {
 
     List<Wish> findByEnd(Date end);
 

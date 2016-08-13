@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class WishDaoImpl extends GenericDaoImpl<Wish, Long> implements WishDao {
+public class WishDaoImpl extends GenericDaoImpl<Wish> implements WishDao {
 
     public List<Wish> findByEnd(Date end) {
         throw new NotImplementedException(); //@TODO: to implement

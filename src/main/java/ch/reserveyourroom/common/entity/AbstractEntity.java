@@ -1,11 +1,11 @@
 package ch.reserveyourroom.common.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Entities in this application has to extend this abstract class, so that they are common methods and
@@ -13,21 +13,21 @@ import java.io.Serializable;
  */
 
 @MappedSuperclass
-public abstract class AbstractEntity<PK extends Serializable> {
+public abstract class AbstractEntity implements Serializable {
 
-    public static final String GENERATOR = "ASSIGNED_SEQUENCE";
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GENERATOR)
-    private PK id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
-    public PK getId() {
+    public String getId() {
 
         return id;
     }
 
-    protected void setId(PK id){
+    protected void setId(String id){
 
         this.id = id;
     }

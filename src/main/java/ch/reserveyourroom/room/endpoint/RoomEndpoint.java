@@ -30,7 +30,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
     private RoomService service;
 
     @Inject
-    private Logger log;
+    private Logger logger;
 
     @GET
     @Path(Routes.PING)
@@ -42,7 +42,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
     @POST
     public Response save(@NotNull final Room room) {
 
-        Long savedEntityId = this.service.save(room);
+        String savedEntityId = this.service.save(room);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final Room room = this.service.find(id);
@@ -69,7 +69,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final Room entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Room entity) {
 
         try {
             Room entityUpdated = this.service.update(entity);

@@ -7,5 +7,5 @@ import ch.reserveyourroom.room.model.Room;
 import javax.ejb.Stateless;
 
 @Stateless
-public class RoomDaoImpl extends GenericDaoImpl<Room, Long> implements RoomDao {
+public class RoomDaoImpl extends GenericDaoImpl<Room> implements RoomDao {
 }

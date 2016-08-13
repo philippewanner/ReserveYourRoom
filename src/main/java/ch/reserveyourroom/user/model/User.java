@@ -17,9 +17,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "USERS")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_USERS")
 @AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
-public class User extends AbstractEntity<Long> {
+public class User extends AbstractEntity {
 
     @Nullable
     @Column(name = "USER_FIRSTNAME", nullable = false)

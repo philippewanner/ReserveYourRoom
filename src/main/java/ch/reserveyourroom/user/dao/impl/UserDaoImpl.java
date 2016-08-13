@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import java.util.List;
 
 @Stateless
-public class UserDaoImpl extends GenericDaoImpl<User, Long> implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     public List<User> findByFirstname(String firstname) {
         throw new NotImplementedException(); //@TODO: to implement

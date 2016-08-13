@@ -16,7 +16,7 @@ public interface GenericEndpoint<T extends AbstractEntity> {
 
     Response getAll();
 
-    Response getById(@NotNull final Long id);
+    Response getById(@NotNull final String id);
 
-    Response updateById(@NotNull final Long id, @NotNull final T entity);
+    Response updateById(@NotNull final String id, @NotNull final T entity);
 }

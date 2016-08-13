@@ -7,5 +7,5 @@ import ch.reserveyourroom.reservation.model.Reservation;
 import javax.ejb.Stateless;
 
 @Stateless
-public class ReservationDaoImpl extends GenericDaoImpl<Reservation, Long> implements ReservationDao {
+public class ReservationDaoImpl extends GenericDaoImpl<Reservation> implements ReservationDao {
 }

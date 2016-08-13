@@ -6,5 +6,5 @@ import ch.reserveyourroom.common.service.GenericService;
 /**
  * Specific method definition for the Building service
  */
-public interface BuildingService extends GenericService<Building, Long>{
+public interface BuildingService extends GenericService<Building>{
 }

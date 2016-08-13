@@ -12,7 +12,7 @@ import java.util.Optional;
  * Interface that defines the CRUD operations that can perform each entity.
  * @param <T> The given entity to perform the operations on.
  */
-public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializable> {
+public interface GenericDao<T extends AbstractEntity> {
 
     /**
      * Count the number of entries from a table that meet some criteria (predicate)
@@ -32,7 +32,7 @@ public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializabl
      * @param t the entity instance to persist.
      * @return the primary key of the created entity instance.
      */
-    PK create(T t);
+    String create(T t);
 
     /**
      * Remove an object from persistent storage in the database.
@@ -46,7 +46,7 @@ public interface GenericDao<T extends AbstractEntity<PK>, PK extends Serializabl
      * @return an Optional which contains the entity object found, empty otherwise.
      */
 
-    Optional<T> read(PK id);
+    Optional<T> read(String id);
 
     /**
      * Save changes made to a persistent object.

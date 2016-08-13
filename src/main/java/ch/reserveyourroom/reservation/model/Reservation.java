@@ -14,9 +14,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "RESERVATIONS")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_RESERVATIONS")
 @AttributeOverride(name = "id", column = @Column(name = "RESERVATION_ID"))
-public class Reservation extends AbstractEntity<Long> {
+public class Reservation extends AbstractEntity {
 
     @NotNull
     @Column(name = "RESERVATION_START", nullable = false)

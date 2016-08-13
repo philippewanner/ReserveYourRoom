@@ -16,9 +16,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ROOMS")
-@SequenceGenerator(name = AbstractEntity.GENERATOR, sequenceName = "SQ_ROOMS")
 @AttributeOverride(name = "id", column = @Column(name = "ROOM_ID"))
-public class Room extends AbstractEntity<Long> {
+public class Room extends AbstractEntity {
 
     @NotEmpty
     @Column(name = "ROOM_NAME", nullable = false)

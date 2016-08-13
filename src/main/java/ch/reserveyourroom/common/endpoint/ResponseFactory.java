@@ -43,7 +43,7 @@ public final class ResponseFactory {
         return Response.status(status.getStatusCode()).entity(entity).build();
     }
 
-    public static Response buildSuccessResponse(BusinessOperation op, Long id) {
+    public static Response buildSuccessResponse(BusinessOperation op, String id) {
 
         HttpStatusCode status = getSuccessResponse(op);
 

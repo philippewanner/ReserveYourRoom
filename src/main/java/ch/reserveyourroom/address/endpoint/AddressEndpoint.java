@@ -42,7 +42,7 @@ public class AddressEndpoint implements GenericEndpoint<Address> {
     @POST
     public Response save(@NotNull final Address address) {
 
-        Long savedEntityId = this.service.save(address);
+        String savedEntityId = this.service.save(address);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class AddressEndpoint implements GenericEndpoint<Address> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final Address address = this.service.find(id);
@@ -69,7 +69,7 @@ public class AddressEndpoint implements GenericEndpoint<Address> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final Address entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Address entity) {
 
         try {
             Address entityUpdated = this.service.update(entity);

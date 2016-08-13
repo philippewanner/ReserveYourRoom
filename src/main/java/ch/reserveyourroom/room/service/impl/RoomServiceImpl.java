@@ -26,7 +26,7 @@ public class RoomServiceImpl implements RoomService {
     @Inject
     private RoomDao roomDao;
 
-    public Room find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Room find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Room> entity = this.roomDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
-    public Optional<Room> search(@NotNull Long key) {
+    public Optional<Room> search(@NotNull String key) {
 
         return this.roomDao.read(key);
     }
@@ -46,7 +46,7 @@ public class RoomServiceImpl implements RoomService {
         return this.roomDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Room room) {
+    public String save(@NotNull @Valid Room room) {
 
         return this.roomDao.create(room);
     }
@@ -61,7 +61,7 @@ public class RoomServiceImpl implements RoomService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Room> t = this.roomDao.read(id);
         if(t.isPresent()){

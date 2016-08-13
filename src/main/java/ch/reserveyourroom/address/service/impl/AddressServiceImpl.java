@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     @Inject
     private AddressDao addressDao;
 
-    public Address find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Address find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Address> entity = this.addressDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +36,7 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-    public Optional<Address> search(@NotNull Long key) {
+    public Optional<Address> search(@NotNull String key) {
 
         return this.addressDao.read(key);
     }
@@ -46,7 +46,7 @@ public class AddressServiceImpl implements AddressService {
         return this.addressDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Address address) {
+    public String save(@NotNull @Valid Address address) {
 
         return this.addressDao.create(address);
     }
@@ -61,7 +61,7 @@ public class AddressServiceImpl implements AddressService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Address> t = this.addressDao.read(id);
         if(t.isPresent()){

@@ -42,7 +42,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
     @POST
     public Response save(@NotNull final Building building) {
 
-        Long savedEntityId = this.service.save(building);
+        String savedEntityId = this.service.save(building);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final Building building = this.service.find(id);
@@ -69,7 +69,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final Building entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Building entity) {
 
         try {
             Building entityUpdated = this.service.update(entity);

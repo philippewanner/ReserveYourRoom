@@ -15,7 +15,7 @@ import java.util.Optional;
  * @param <T> The given entity to perform the operations on.
  */
 
-public interface GenericService<T extends AbstractEntity, PK extends Serializable> {
+public interface GenericService<T extends AbstractEntity> {
 
     /**
      * Find a <T> with the given id.
@@ -23,7 +23,7 @@ public interface GenericService<T extends AbstractEntity, PK extends Serializabl
      * @param key Id of the <T> to find
      * @return return the found T, otherwise throws an EntityNotFoundException.
      */
-    T find(@NotNull PK key) throws BusinessUnprocessableOperationException;
+    T find(@NotNull String key) throws BusinessUnprocessableOperationException;
 
     /**
      * Search a <T> corresponding to the given id.
@@ -31,7 +31,7 @@ public interface GenericService<T extends AbstractEntity, PK extends Serializabl
      * @param key Id of the <T> to search
      * @return return the found T, or an empty Optional if not found.
      */
-    Optional<T> search(@NotNull PK key);
+    Optional<T> search(@NotNull String key);
 
     /**
      * Load all entity <T>
@@ -46,7 +46,7 @@ public interface GenericService<T extends AbstractEntity, PK extends Serializabl
      * @param t the <T> to save.
      * @return the persisted <T>.
      */
-    PK save(@NotNull @Valid T t);
+    String save(@NotNull @Valid T t);
 
     /**
      * Update a <T>.
@@ -60,5 +60,5 @@ public interface GenericService<T extends AbstractEntity, PK extends Serializabl
     /**
      * Deletes a <T>
      */
-    void delete(@NotEmpty PK id) throws BusinessUnprocessableOperationException;
+    void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException;
 }

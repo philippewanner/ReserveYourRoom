@@ -42,7 +42,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
     @POST
     public Response save(@NotNull final Wish wish) {
 
-        Long savedEntityId = this.service.save(wish);
+        String savedEntityId = this.service.save(wish);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +55,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final Long id) {
+    public Response getById(@NotNull @PathParam("id") final String id) {
 
         try {
             final Wish wish = this.service.find(id);
@@ -69,7 +69,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final Long id, @NotNull final Wish entity) {
+    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Wish entity) {
 
         try {
             Wish entityUpdated = this.service.update(entity);

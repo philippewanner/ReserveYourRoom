@@ -8,5 +8,5 @@ import ch.reserveyourroom.common.dao.impl.GenericDaoImpl;
 import javax.ejb.Stateless;
 
 @Stateless
-public class AddressDaoImpl extends GenericDaoImpl<Address, Long> implements AddressDao {
+public class AddressDaoImpl extends GenericDaoImpl<Address> implements AddressDao {
 }

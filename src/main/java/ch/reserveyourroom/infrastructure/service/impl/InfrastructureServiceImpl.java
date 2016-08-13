@@ -26,7 +26,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
     @Inject
     private InfrastructureDao infrastructureDao;
 
-    public Infrastructure find(@NotNull Long key) throws BusinessUnprocessableOperationException {
+    public Infrastructure find(@NotNull String key) throws BusinessUnprocessableOperationException {
 
         Optional<Infrastructure> entity = this.infrastructureDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +36,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
         }
     }
 
-    public Optional<Infrastructure> search(@NotNull Long key) {
+    public Optional<Infrastructure> search(@NotNull String key) {
 
         return this.infrastructureDao.read(key);
     }
@@ -46,7 +46,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
         return this.infrastructureDao.loadAll();
     }
 
-    public Long save(@NotNull @Valid Infrastructure infrastructure) {
+    public String save(@NotNull @Valid Infrastructure infrastructure) {
 
         return this.infrastructureDao.create(infrastructure);
     }
@@ -61,7 +61,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
 
     }
 
-    public void delete(@NotEmpty Long id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
 
         Optional<Infrastructure> t = this.infrastructureDao.read(id);
         if(t.isPresent()){

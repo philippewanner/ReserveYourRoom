@@ -7,7 +7,7 @@ import ch.reserveyourroom.wish.model.Wish;
 /**
  * Specific method definition for the Wish service
  */
-public interface WishService extends GenericService<Wish, Long> {
+public interface WishService extends GenericService<Wish> {
 
 
 }

@@ -9,5 +9,5 @@ import javax.ejb.Stateless;
  * Specific data access object for the Infrastructure entity.
  */
 @Stateless
-public interface InfrastructureDao extends GenericDao<Infrastructure, Long> {
+public interface InfrastructureDao extends GenericDao<Infrastructure> {
 }
