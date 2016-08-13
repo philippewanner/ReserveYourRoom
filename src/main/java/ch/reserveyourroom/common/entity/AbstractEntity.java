@@ -3,7 +3,6 @@ package ch.reserveyourroom.common.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -17,19 +16,20 @@ public abstract class AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
+    private UUID uuid;
 
-    public String getId() {
+    public UUID getUuid() {
 
-        return id;
+        return uuid;
     }
 
-    protected void setId(String id){
+    protected void setUuid(UUID id){
 
-        this.id = id;
+        this.uuid = id;
     }
 
     public abstract int hashCode();

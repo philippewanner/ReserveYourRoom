@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "BUILDINGS")
-@AttributeOverride(name = "id", column = @Column(name = "BUILDING_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "BUILDING_ID"))
 public class Building extends AbstractEntity {
 
     @NotNull
@@ -36,7 +36,7 @@ public class Building extends AbstractEntity {
     @Override
     public String toString() {
 
-        return "Building [id=" + getId() + ", name=" + name + "]";
+        return "Building [id=" + getUuid() + ", name=" + name + "]";
     }
 
     public String getName(){
@@ -65,7 +65,7 @@ public class Building extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Building extends AbstractEntity {
         if (!(o instanceof Building)) return false;
 
         Building other = (Building) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.name != null && this.name.equals(other.name)) && (this.rooms != null && this.rooms.equals(other.rooms)) && this.address != null && this.address.equals(other.address);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.name != null && this.name.equals(other.name)) && (this.rooms != null && this.rooms.equals(other.rooms)) && this.address != null && this.address.equals(other.address);
 
     }
 }

@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ADDRESSES")
-@AttributeOverride(name = "id", column = @Column(name = "ADDRESS_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "ADDRESS_ID"))
 public class Address extends AbstractEntity {
 
     @NotNull
@@ -44,7 +44,7 @@ public class Address extends AbstractEntity {
     @Override
     public String toString() {
 
-        return "Address [id=" + getId() + ", street=" + street + ", housenumber=" + housenumber + ", zip=" + zipcode + ", city=" + city + ", state=" + state + ", country=" + country + "]";
+        return "Address [id=" + getUuid() + ", street=" + street + ", housenumber=" + housenumber + ", zip=" + zipcode + ", city=" + city + ", state=" + state + ", country=" + country + "]";
     }
 
     public void setCity(String city) {
@@ -97,7 +97,7 @@ public class Address extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -106,7 +106,7 @@ public class Address extends AbstractEntity {
         if (!(o instanceof Address)) return false;
 
         Address other = (Address) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.street != null && this.street.equals(other.street)) && (this.city != null && this.city.equals(other.city)) && (this.state != null && this.state.equals(other.state)) && (this.zipcode != null && this.zipcode.equals(other.zipcode)) && (this.country != null && this.country.equals(other.country)) && this.housenumber != null && this.housenumber.equals(other.housenumber);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.street != null && this.street.equals(other.street)) && (this.city != null && this.city.equals(other.city)) && (this.state != null && this.state.equals(other.state)) && (this.zipcode != null && this.zipcode.equals(other.zipcode)) && (this.country != null && this.country.equals(other.country)) && this.housenumber != null && this.housenumber.equals(other.housenumber);
 
     }
 }

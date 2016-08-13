@@ -19,7 +19,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "WHISHES")
-@AttributeOverride(name = "id", column = @Column(name = "WHISH_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "WHISH_ID"))
 public class Wish extends AbstractEntity {
 
     @NotNull
@@ -52,7 +52,7 @@ public class Wish extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -61,14 +61,14 @@ public class Wish extends AbstractEntity {
         if (!(o instanceof Wish)) return false;
 
         Wish other = (Wish) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && (this.infrastructures != null && this.infrastructures.equals(other.infrastructures)) && (this.address != null && this.address.equals(other.address)) && (this.building != null && this.building.equals(other.building)) && this.room != null && this.room.equals(other.room);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && (this.infrastructures != null && this.infrastructures.equals(other.infrastructures)) && (this.address != null && this.address.equals(other.address)) && (this.building != null && this.building.equals(other.building)) && this.room != null && this.room.equals(other.room);
 
     }
 
     @Override
     public String toString() {
 
-        return "Whish [id=" + getId() + ", start=" + start + ", end=" + end + "]";
+        return "Whish [id=" + getUuid() + ", start=" + start + ", end=" + end + "]";
     }
 
     public void setStart(Date start) {

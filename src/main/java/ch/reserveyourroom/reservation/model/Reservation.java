@@ -14,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "RESERVATIONS")
-@AttributeOverride(name = "id", column = @Column(name = "RESERVATION_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "RESERVATION_ID"))
 public class Reservation extends AbstractEntity {
 
     @NotNull
@@ -33,12 +33,12 @@ public class Reservation extends AbstractEntity {
     @Override
     public String toString() {
 
-        return "Reservation [id=" + getId() + ", start=" + start + ", end=" + end + "]";
+        return "Reservation [id=" + getUuid() + ", start=" + start + ", end=" + end + "]";
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Reservation extends AbstractEntity {
         if (!(o instanceof Reservation)) return false;
 
         Reservation other = (Reservation) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
 
     }
 }

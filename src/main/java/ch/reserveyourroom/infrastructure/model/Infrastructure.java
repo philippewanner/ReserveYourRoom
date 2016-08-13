@@ -3,8 +3,6 @@ package ch.reserveyourroom.infrastructure.model;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,18 +11,18 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "INFRASTRUCTURES")
-@AttributeOverride(name = "id", column = @Column(name = "INFRASTRUCTURE_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "INFRASTRUCTURE_ID"))
 public class Infrastructure extends AbstractEntity {
 
     @Override
     public String toString() {
 
-        return "Infrastructure [id=" + getId() + "]";
+        return "Infrastructure [id=" + getUuid() + "]";
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -33,7 +31,7 @@ public class Infrastructure extends AbstractEntity {
         if(!(o instanceof Infrastructure)) return false;
 
         Infrastructure other = (Infrastructure) o;
-        return Objects.equals(this.getId(), other.getId());
+        return Objects.equals(this.getUuid(), other.getUuid());
 
     }
 }

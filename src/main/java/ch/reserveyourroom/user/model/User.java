@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
-import javax.validation.OverridesAttribute;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +16,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "USERS")
-@AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "USER_ID"))
 public class User extends AbstractEntity {
 
     @Nullable
@@ -54,7 +53,7 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
 
-        return "User [id=" + getId() + "name=" + firstname + " " + lastname + " email=" + email + "]";
+        return "User [id=" + getUuid() + "name=" + firstname + " " + lastname + " email=" + email + "]";
     }
 
     public void setEmail(String email) {
@@ -93,7 +92,12 @@ public class User extends AbstractEntity {
     @Override
     public int hashCode() {
 
-        return getId() != null ? getId().hashCode() : 0;
+        int hash = 3;
+        hash = hash * 17 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 3 + (firstname != null ? firstname.hashCode() : 0);
+        hash = hash * 13 + (lastname != null ? lastname.hashCode() : 0);
+        hash = hash * 5 + (email != null ? email.hashCode() : 0);
+        return hash;
     }
 
     @Override
@@ -102,7 +106,7 @@ public class User extends AbstractEntity {
         if (!(o instanceof User)) return false;
 
         User other = (User) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.firstname != null && this.firstname.equals(other.firstname)) && (this.lastname != null && this.lastname.equals(other.lastname)) && (this.email != null && this.email.equals(other.email)) && (this.whishes != null && this.whishes.equals(other.whishes)) && this.reservations != null && this.reservations.equals(other.reservations);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.firstname != null && this.firstname.equals(other.firstname)) && (this.lastname != null && this.lastname.equals(other.lastname)) && (this.email != null && this.email.equals(other.email)) && (this.whishes != null && this.whishes.equals(other.whishes)) && this.reservations != null && this.reservations.equals(other.reservations);
 
     }
 }

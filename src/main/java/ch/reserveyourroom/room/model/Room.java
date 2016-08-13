@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ROOMS")
-@AttributeOverride(name = "id", column = @Column(name = "ROOM_ID"))
+@AttributeOverride(name = "uuid", column = @Column(name = "ROOM_ID"))
 public class Room extends AbstractEntity {
 
     @NotEmpty
@@ -43,7 +43,7 @@ public class Room extends AbstractEntity {
     @Override
     public String toString() {
 
-        return "Room [id=" + getId() + ", name=" + name + "]";
+        return "Room [id=" + getUuid() + ", name=" + name + "]";
     }
 
     public void setName(String name) {
@@ -90,7 +90,7 @@ public class Room extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getUuid().hashCode();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Room extends AbstractEntity {
         if (!(o instanceof Room)) return false;
 
         Room other = (Room) o;
-        return Objects.equals(this.getId(), other.getId()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor)) && this.infrastructures != null && this.infrastructures.equals(other.infrastructures);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor)) && this.infrastructures != null && this.infrastructures.equals(other.infrastructures);
 
     }
 }
