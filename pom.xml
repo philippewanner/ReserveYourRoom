@@ -36,6 +36,7 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -51,6 +52,9 @@
         </dependency>
 
         <!-- Persistence -->
+        <!-- As Wildfly is already using Hibernate as JPA provider
+        (https://docs.jboss.org/author/display/WFLY10/JPA+Reference+Guide#JPAReferenceGuide-Introduction),
+        I do not need to provide such classes at all (unless I am directly using Hibernate classes) -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -60,12 +64,13 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.1.Final</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Logging -->
