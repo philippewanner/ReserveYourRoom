@@ -56,4 +56,28 @@ public class Reservation extends AbstractEntity {
         return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
 
     }
+
+    public Date getStart(){
+        return this.start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd(){
+        return this.end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Room getRoom(){
+        return this.room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 }

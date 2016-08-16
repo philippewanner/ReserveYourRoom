@@ -3,6 +3,8 @@ package ch.reserveyourroom.user.model;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.reservation.model.Reservation;
 import ch.reserveyourroom.wish.model.Wish;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
@@ -34,11 +36,13 @@ public class User extends AbstractEntity {
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "WHISH_ID")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Wish> whishes;
 
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "RESERVATION_ID")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Reservation> reservations;
 
     @Nullable

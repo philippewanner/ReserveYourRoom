@@ -11,10 +11,11 @@ import java.util.List;
  */
 
 public interface WishDao extends GenericDao<Wish> {
-
+/*
     List<Wish> findByEnd(Date end);
 
     List<Wish> findByStart(Date start);
 
     List<Wish> findByRoomId(Long roomId);
+*/
 }

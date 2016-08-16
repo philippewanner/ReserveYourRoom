@@ -3,6 +3,8 @@ package ch.reserveyourroom.building.model;
 import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.room.model.Room;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,6 +27,7 @@ public class Building extends AbstractEntity {
     @NotNull
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="ROOM_ID")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Room> rooms;
 
     @NotNull

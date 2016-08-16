@@ -3,10 +3,11 @@ package ch.reserveyourroom.common.dao;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.Predicate;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Interface that defines the CRUD operations that can perform each entity.
@@ -19,7 +20,7 @@ public interface GenericDao<T extends AbstractEntity> {
      * @param predicate a predicate to meet
      * @return the number of records meeting the criteria.
      */
-    long countAll(Predicate predicate);
+    long countAll(final Predicate predicate);
 
     /**
      * Load and return all entities from the database corresponding to this entity.
@@ -54,5 +55,12 @@ public interface GenericDao<T extends AbstractEntity> {
      * @return the old state of the object before the update.
      */
     T update(T t) throws EntityOptimisticLockException;
+
+    /**
+     * This method is used only for unit tests purpose, to
+     * inject entity manager into EJB3 stateless bean.
+     * @param em the entity manager to set
+     */
+    void setEntityManager(EntityManager em);
 
 }

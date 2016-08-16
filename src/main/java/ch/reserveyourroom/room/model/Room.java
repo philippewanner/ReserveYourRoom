@@ -2,6 +2,8 @@ package ch.reserveyourroom.room.model;
 
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
@@ -38,6 +40,7 @@ public class Room extends AbstractEntity {
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "INFRASTRUCTURE_ID")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Infrastructure> infrastructures;
 
     @Override

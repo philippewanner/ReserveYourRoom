@@ -4,6 +4,8 @@ import ch.reserveyourroom.common.dao.GenericDao;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
@@ -11,18 +13,22 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public abstract class GenericDaoImpl<T extends AbstractEntity> implements GenericDao<T> {
 
     @PersistenceContext
-    protected EntityManager em;
+    private EntityManager em;
 
+    @NotNull
     private Class<T> entityClass;
 
+    @NotNull
     private Class<String> idClass;
 
     public GenericDaoImpl(){
@@ -30,7 +36,6 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         Type type = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) type;
         entityClass = (Class<T>) pt.getActualTypeArguments()[0];
-        //idClass = (Class<String>) pt.getActualTypeArguments()[1];
     }
 
     public long countAll(final Predicate predicate) {
@@ -61,7 +66,7 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
 
     public Optional<T> read(final String id) {
 
-        return Optional.ofNullable(this.em.find(entityClass, id));
+        return Optional.ofNullable(this.em.find(entityClass, UUID.fromString(id)));
     }
 
     public T update(final T t) throws EntityOptimisticLockException {
@@ -71,5 +76,9 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         } catch (OptimisticLockException e) {
             throw new EntityOptimisticLockException(t, e);
         }
+    }
+
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
 }

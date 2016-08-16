@@ -5,6 +5,8 @@ import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import ch.reserveyourroom.room.model.Room;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -33,6 +35,7 @@ public class Wish extends AbstractEntity {
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "INFRASTRUCTURE_ID")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Infrastructure> infrastructures;
 
     @Nullable

@@ -3,7 +3,10 @@ package ch.reserveyourroom.address.model;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 
 import javax.annotation.Nullable;
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 

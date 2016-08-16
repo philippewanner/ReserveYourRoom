@@ -11,10 +11,11 @@ import java.util.List;
  */
 
 public interface UserDao extends GenericDao<User> {
-
+/*
     List<User> findByFirstname(String firstname);
 
     List<User> findByLastname(String firstname);
 
     List<User> findByEmail(String firstname);
+*/
 }
