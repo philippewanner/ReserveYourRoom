@@ -6,10 +6,7 @@ import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockExcep
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -36,6 +33,7 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         Type type = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) type;
         entityClass = (Class<T>) pt.getActualTypeArguments()[0];
+        //idClass = (Class<PK>) pt.getActualTypeArguments()[1];
     }
 
     public long countAll(final Predicate predicate) {
@@ -43,14 +41,16 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         cq.select(cb.count(cq.from(entityClass)));
-        cq.where(predicate);
+        //cq.where(predicate);
+        TypedQuery<Long> typedQuery = em.createQuery(cq);
+        Long count = typedQuery.getSingleResult();
         return em.createQuery(cq).getSingleResult();
     }
 
     public List<T> loadAll() {
 
         Query query = em.createQuery("FROM " + entityClass.getName());
-        return (List<T>) query.getResultList();
+        return query.getResultList();
     }
 
     public String create(final T t) {

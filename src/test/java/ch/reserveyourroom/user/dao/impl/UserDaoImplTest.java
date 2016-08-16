@@ -1,5 +1,6 @@
 package ch.reserveyourroom.user.dao.impl;
 
+import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 import ch.reserveyourroom.reservation.dao.ReservationDao;
 import ch.reserveyourroom.reservation.dao.impl.ReservationDaoImpl;
 import ch.reserveyourroom.user.dao.UserDao;
@@ -24,6 +25,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.Assert.assertTrue;
@@ -72,7 +75,7 @@ public class UserDaoImplTest extends TestCase {
             em.close();
         }
     }
-/*
+
     @Test
     public void should_countAllUsers() {
         // Given
@@ -96,7 +99,7 @@ public class UserDaoImplTest extends TestCase {
         // Then
         assertTrue("The number of users has to be two", 2 == count);
     }
-*/
+
     @Test
     public void should_createANewUserInTheDb() {
 
@@ -113,192 +116,62 @@ public class UserDaoImplTest extends TestCase {
         User userRead = userDao.read(userId).get();
         assertTrue("The Id of the user can not be read", userId.compareTo(userRead.getUuid().toString()) == 0);
     }
+
+    @Test
+    public void should_loadAllUsersFromDb() {
+
+        // Given
+        int nbUserToCreate = 5;
+        for(int i=0; i < nbUserToCreate; i++) {
+            this.createSampleUserInDb();
+        }
+
+        // When
+        final List<User> users = userDao.loadAll();
+
+        // Then
+        assertTrue("The users size has to match the users found", nbUserToCreate == users.size());
+    }
+
+    @Test
+    public void should_deleteUserFromDb() {
+
+        // Given
+        String pk = this.createSampleUserInDb();
+        Optional<User> userFound = userDao.read(pk);
+
+        // When
+        userDao.delete(userFound.get());
+
+        // Then
+        assertFalse("The user has to be deleted from the DB", userDao.read(pk).isPresent());
+    }
+
+    @Test
+    public void should_updateUserFromDb() {
+
+        // Given
+        String pk = this.createSampleUserInDb();
+        Optional<User> userFound = userDao.read(pk);
+        String newEmail = "test";
+
+        // When
+        try {
+            userFound.get().setEmail(newEmail);
+            userDao.update(userFound.get());
+        } catch (EntityOptimisticLockException e) {
+            e.printStackTrace();
+        }
+
+        // Then
+        assertFalse("The update can not occur", userDao.read(pk).get().getEmail().compareTo(newEmail) == 0);
+    }
+
+    private String createSampleUserInDb(){
+        User u = new User();
+        u.setEmail("first.last@mail.com");
+        u.setFirstname("first");
+        u.setLastname("last");
+        return userDao.create(u);
+    }
 }
-
-/*
-
-
-    long countAll(Predicate predicate);
-    List<T> loadAll();
-    String create(T t);
-    void delete(T t);
-    Optional<T> read(String id);
-    T update(T t) throws EntityOptimisticLockException;
-
-
-@RunWith(MockitoJUnitRunner.class)
-public class AnamneseDaoImplTest extends DaoTestTemplate {
-
-    private final NeurologischesUntersuchungDaoImpl neuroDao = new NeurologischesUntersuchungDaoImpl();
-    private final AnamneseDao dao = new AnamneseDaoImpl(neuroDao);
-    private final BehandlungsfallDao behandlungsfallDao = new BehandlungsfallDaoImpl();
-    private final DiagnoseDao diagnoseDao = new DiagnoseDaoImpl();
-    private final ProtokollVorlageDao protokollvorlageDao = new ProtokollVorlageDaoImpl();
-    private final BereichDao bereichDao = new BereichDaoImpl();
-    private final VertragspartnerDao vertragspartnerDao = new VertragspartnerDaoImpl();
-    private final PraxisDao praxisDao = new PraxisDaoImpl();
-    private final PatientDao patientDao = new PatientDaoImpl();
-    private final DoctorDao doctorDao = new DoctorDaoImpl();
-    private final KostentraegerDao kostentragerDao = new KostentraegerDaoImpl();
-    private Anamnese anamneseA;
-    private Anamnese anamneseB;
-
-    @Override
-    protected List<GenericDao<?>> getDaos() {
-
-        return Arrays
-                .asList(this.dao, this.behandlungsfallDao, this.diagnoseDao, this.protokollvorlageDao, this.bereichDao,
-                        this.vertragspartnerDao, this.praxisDao, this.patientDao, this.doctorDao, this.kostentragerDao);
-    }
-
-    @Before
-    public void before() {
-
-        Date date = new Date();
-
-        Bereich bereich = TestUtils.createBereich("Bereich sample", Status.ACTIVE);
-        bereichDao.persist(bereich);
-
-        Diagnose diagnose = TestUtils
-                .createDiagnose("Diagnose sample", bereich, Patientengeschichte.NACH_OPERATION, true, Stadium.CHRONISCH);
-        diagnoseDao.persist(diagnose);
-
-        ProtokollVorlage protokollvorlage = TestUtils.createProtokollVorlage("Protokoll sample", Status.ACTIVE, bereich);
-        protokollvorlageDao.persist(protokollvorlage);
-
-        Address address = TestUtils.createAddress("Some city", "pobox", "state", "street", "zipcode");
-        Praxis praxis = TestUtils
-                .createPraxis("Praxis sample", "test@test.com", "432432432432", "432432432432", "http://www.test.ch",
-                        address);
-        praxisDao.persist(praxis);
-
-        Vertragspartner vertragspartner = TestUtils.createVertragspartner("Vertragspartner A", praxis);
-        vertragspartnerDao.persist(vertragspartner);
-
-        Patient patient = TestUtils.createPatient("Frank", "Dubosc", "03333", vertragspartner);
-        patientDao.persist(patient);
-
-        Doctor doctor = TestUtils.createDoctor("Jean", "Charles");
-        doctorDao.persist(doctor);
-
-        Kostentraeger kostentrager = TestUtils.createKostentraeger("Kostentrage sample");
-        kostentragerDao.persist(kostentrager);
-
-        Behandlungsfall behandlungsfallA = TestUtils
-                .createBehandlungsfall("BusinesIDA", date, diagnose, protokollvorlage, praxis, patient, doctor,
-                        kostentrager);
-
-        Behandlungsfall behandlungsfallB = TestUtils
-                .createBehandlungsfall("BusinesIDB", date, diagnose, protokollvorlage, praxis, patient, doctor,
-                        kostentrager);
-
-        behandlungsfallDao.persist(behandlungsfallA);
-        behandlungsfallDao.persist(behandlungsfallB);
-
-        // A
-        this.anamneseA = new Anamnese();
-        this.anamneseA.setCognitiveFactors(this.randomString(100));
-        this.anamneseA.setComorbidities(this.randomString(100));
-        this.anamneseA.setComplaints(this.randomString(100));
-        this.anamneseA.setComplaintsDevelopment(this.randomString(100));
-        this.anamneseA.setFunctionalLimitations(this.randomString(100));
-        this.anamneseA.setLifestyleFactors(this.randomString(100));
-        this.anamneseA.setMriDiagnosis(this.randomString(100));
-        this.anamneseA.setPatientGoal(this.randomString(100));
-        this.anamneseA.setAerztlicheInformationen(this.randomString(100));
-        this.anamneseA.setStage(Stadium.REZIDIVIEREND);
-        this.anamneseA.setVas24h((short) 0);
-        this.anamneseA.setSchmerzzoneP1(this.randomString(50));
-        this.anamneseA.setSchmerzzoneP2(this.randomString(50));
-        this.anamneseA.setSchmerzzoneP3(this.randomString(50));
-        this.anamneseA.setPainCharacter24h(PainCharacter.STECHEND);
-        this.anamneseA.setStatus(Status.ACTIVE);
-        this.anamneseA.setPatientengeschichte(Patientengeschichte.KRANKHEIT);
-        this.anamneseA.setBehandlungsfall(behandlungsfallA);
-        this.anamneseA.setBelastbarkeit(Belastbarkeit.OPTIMAL);
-        this.anamneseA.setBelastbarkeitComment(this.randomString(150));
-        this.anamneseA.setBelastbarkeitSkala((short) 5);
-        this.anamneseA.setEmotionaleFaktoren(EmotionaleFaktoren.FRUSTRATION);
-        this.anamneseA.setEmotionaleFaktorenComment(this.randomString(150));
-        this.dao.persist(this.anamneseA);
-
-        // B
-        this.anamneseB = new Anamnese();
-        this.anamneseB.setCognitiveFactors(null);
-        this.anamneseB.setComorbidities(null);
-        this.anamneseB.setComplaints(null);
-        this.anamneseB.setComplaintsDevelopment(null);
-        this.anamneseB.setFunctionalLimitations(null);
-        this.anamneseB.setLifestyleFactors(null);
-        this.anamneseB.setMriDiagnosis(null);
-        this.anamneseB.setPatientGoal(null);
-        this.anamneseB.setAerztlicheInformationen(null);
-        this.anamneseB.setStage(Stadium.AKUT);
-        this.anamneseB.setVasMittag((short) 10);
-        this.anamneseB.setSchmerzzoneP1(null);
-        this.anamneseB.setSchmerzzoneP2(null);
-        this.anamneseB.setSchmerzzoneP3(null);
-        this.anamneseB.setPainCharacterMittag(null);
-        this.anamneseB.setStatus(Status.INACTIVE);
-        this.anamneseB.setPatientengeschichte(Patientengeschichte.NACH_OPERATION);
-        this.anamneseB.setBehandlungsfall(behandlungsfallB);
-        this.anamneseB.setBelastbarkeit(Belastbarkeit.LEICHT_ERNIEDRIGT);
-        this.anamneseB.setBelastbarkeitComment(this.randomString(150));
-        this.anamneseB.setBelastbarkeitSkala((short) 3);
-        this.anamneseB.setEmotionaleFaktoren(EmotionaleFaktoren.DEPRESSION);
-        this.anamneseB.setEmotionaleFaktorenComment(this.randomString(150));
-        this.dao.persist(this.anamneseB);
-
-        this.entityManager.flush();
-    }
-
-    @Test
-    public void testFindAll() {
-
-        List<Anamnese> result = this.dao.findAll();
-        assertNotNull(result);
-        assertEquals(Sets.newHashSet(this.anamneseA, this.anamneseB), new HashSet<>(result));
-    }
-
-    @Test
-    public void testUpdate() throws PhysioQMapOptimisticLockException {
-
-        Short vas = 5;
-        String patientGoal = "<Patien goal>";
-
-        List<Anamnese> result = this.dao.findAll();
-        Anamnese anamnese = result.get(0);
-        anamnese.setStatus(Status.INACTIVE);
-        anamnese.setVasAbend(vas);
-        anamnese.setPatientGoal(patientGoal);
-        this.dao.update(anamnese);
-
-        flushAndClear();
-
-        Optional<Anamnese> found = this.dao.find(anamnese.getId());
-        assertEquals(Status.INACTIVE, found.get().getStatus());
-        assertEquals(vas, found.get().getVasAbend());
-        assertEquals(patientGoal, found.get().getPatientGoal());
-    }
-
-    @Test
-    public void testDelete() {
-
-        List<Anamnese> result = this.dao.findAll();
-        Anamnese anamnese = result.get(0);
-        this.dao.delete(anamnese.getId());
-
-        flushAndClear();
-
-        Optional<Anamnese> found = this.dao.find(anamnese.getId());
-        assertFalse(found.isPresent());
-    }
-
-    private String randomString(int targetStringLength) {
-
-        return RandomStringUtils.randomAlphanumeric(targetStringLength);
-
-    }
-
-}
-*/

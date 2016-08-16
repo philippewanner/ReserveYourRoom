@@ -663,6 +663,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/log4j.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/webapp/WEB-INF/beans.xml">
           <value>
             <set />
@@ -709,6 +714,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/resources/META-INF/persistence.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/resources/log4j.properties">
           <value>
             <set />
           </value>
