@@ -3,6 +3,7 @@ package ch.reserveyourroom.reservation.model;
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.room.model.Room;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

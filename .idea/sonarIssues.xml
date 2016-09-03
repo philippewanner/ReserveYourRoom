@@ -733,6 +733,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/room/dao/impl/RoomDaoImplTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/user/dao/impl/UserDaoImplTest.java">
           <value>
             <set />

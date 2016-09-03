@@ -1,4 +1,3 @@
-/*
 
 package ch.reserveyourroom.wish.dao.impl;
 
@@ -20,9 +19,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
-
+/**
  * Unit testing the wish dao implementation.
-
+ */
 
 
 
@@ -196,4 +195,3 @@ public class WishDaoImplTest extends TestCase{
         return ids;
     }
 }
-*/

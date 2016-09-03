@@ -2,6 +2,7 @@ package ch.reserveyourroom.room.model;
 
 import ch.reserveyourroom.common.entity.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
+import ch.reserveyourroom.reservation.model.Reservation;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -119,4 +120,5 @@ public class Room extends AbstractEntity implements Comparable<Room> {
     public int compareTo(Room o) {
         return this.name.compareTo(o.name);
     }
+
 }
