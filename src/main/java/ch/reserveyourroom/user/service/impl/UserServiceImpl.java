@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> t = this.userDao.read(id);
         if(t.isPresent()){
-            this.userDao.delete(t.get());
+            this.userDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

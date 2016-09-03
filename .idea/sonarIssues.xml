@@ -13,6 +13,36 @@
             <set />
           </value>
         </entry>
+        <entry key="$USER_HOME$/Downloads/DBFReader/src/Main.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/dbf-master/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/dbf-master/dbf-reader/src/main/java/org/jamel/dbf/structure/DbfField.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/jdbf-master/src/main/java/JdbfMain.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/jdbf-master/src/test/java/net/iryndin/jdbf/TestDbfReader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/xBaseJ/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/ReserveYourRoom.iml">
           <value>
             <set />
@@ -683,6 +713,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/address/dao/impl/AddressDaoImplTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/address/model/AddressTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/building/dao/impl/BuildingDaoImplTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/reservation/dao/impl/ReservationDaoImplTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/user/dao/impl/UserDaoImplTest.java">
           <value>
             <set />
@@ -693,12 +743,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/util/GenerateModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/util/PersistenceHelper.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/util/PersitenceHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/ch/reserveyourroom/util/SampleDataFactory.java">
           <value>
             <set />
           </value>
@@ -749,6 +809,11 @@
           </value>
         </entry>
         <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.sql">
           <value>
             <set />
           </value>

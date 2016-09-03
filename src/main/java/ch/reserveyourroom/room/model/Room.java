@@ -9,8 +9,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entity that represent a room model.
@@ -19,7 +21,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "ROOMS")
 @AttributeOverride(name = "uuid", column = @Column(name = "ROOM_ID"))
-public class Room extends AbstractEntity {
+public class Room extends AbstractEntity implements Comparable<Room> {
 
     @NotEmpty
     @Column(name = "ROOM_NAME", nullable = false)
@@ -40,8 +42,7 @@ public class Room extends AbstractEntity {
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "INFRASTRUCTURE_ID")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Infrastructure> infrastructures;
+    private Set<Infrastructure> infrastructures;
 
     @Override
     public String toString() {
@@ -83,11 +84,11 @@ public class Room extends AbstractEntity {
     }
 
     @Nullable
-    public List<Infrastructure> getInfrastructures() {
+    public Set<Infrastructure> getInfrastructures() {
         return infrastructures;
     }
 
-    public void setInfrastructures(@Nullable List<Infrastructure> infrastructures) {
+    public void setInfrastructures(@Nullable Set<Infrastructure> infrastructures) {
         this.infrastructures = infrastructures;
     }
 
@@ -110,7 +111,12 @@ public class Room extends AbstractEntity {
         if (!(o instanceof Room)) return false;
 
         Room other = (Room) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor)) && this.infrastructures != null && this.infrastructures.equals(other.infrastructures);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor));
 
+    }
+
+    @Override
+    public int compareTo(Room o) {
+        return this.name.compareTo(o.name);
     }
 }

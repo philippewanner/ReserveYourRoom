@@ -65,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
 
         Optional<Address> t = this.addressDao.read(id);
         if(t.isPresent()){
-            this.addressDao.delete(t.get());
+            this.addressDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

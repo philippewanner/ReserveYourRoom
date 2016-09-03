@@ -65,7 +65,7 @@ public class RoomServiceImpl implements RoomService {
 
         Optional<Room> t = this.roomDao.read(id);
         if(t.isPresent()){
-            this.roomDao.delete(t.get());
+            this.roomDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

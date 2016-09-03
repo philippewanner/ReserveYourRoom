@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entity that represent a user model.
@@ -30,27 +31,25 @@ public class User extends AbstractEntity {
     private String lastname;
 
     @NotEmpty
-    @Column(name = "USER_EMAIL", nullable = false, unique = true)
+    @Column(name = "USER_EMAIL", nullable = false)
     private String email;
 
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "WHISH_ID")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Wish> whishes;
+    private Set<Wish> whishes;
 
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "RESERVATION_ID")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Reservation> reservations;
+    private Set<Reservation> reservations;
 
-    @Nullable
-    public List<Wish> getWhishes() {
+
+    public Set<Wish> getWhishes() {
         return whishes;
     }
 
-    public void setWhishes(@Nullable List<Wish> whishes) {
+    public void setWhishes(@Nullable Set<Wish> whishes) {
         this.whishes = whishes;
     }
 
@@ -84,12 +83,12 @@ public class User extends AbstractEntity {
         return this.firstname;
     }
 
-    public void setReservations(@Nullable List<Reservation> reservations) {
+    public void setReservations(@Nullable Set<Reservation> reservations) {
         this.reservations = reservations;
     }
 
     @Nullable
-    public List<Reservation> getReservations() {
+    public Set<Reservation> getReservations() {
         return reservations;
     }
 

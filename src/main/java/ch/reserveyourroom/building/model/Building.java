@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entity that represent a building model.
@@ -27,8 +28,7 @@ public class Building extends AbstractEntity {
     @NotNull
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="ROOM_ID")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Room> rooms;
+    private Set<Room> rooms;
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -50,11 +50,11 @@ public class Building extends AbstractEntity {
         this.name = name;
     }
 
-    public List<Room> getRooms() {
+    public Set<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<Room> rooms) {
+    public void setRooms(Set<Room> rooms) {
         this.rooms = rooms;
     }
 

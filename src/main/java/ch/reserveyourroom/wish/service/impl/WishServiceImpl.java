@@ -65,7 +65,7 @@ public class WishServiceImpl implements WishService {
 
         Optional<Wish> t = this.wishDao.read(id);
         if(t.isPresent()){
-            this.wishDao.delete(t.get());
+            this.wishDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

@@ -71,7 +71,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         Optional<Reservation> t = this.reservationDao.read(id);
         if(t.isPresent()){
-            this.reservationDao.delete(t.get());
+            this.reservationDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

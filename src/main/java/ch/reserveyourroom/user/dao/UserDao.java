@@ -4,7 +4,9 @@ import ch.reserveyourroom.common.dao.GenericDao;
 import ch.reserveyourroom.room.model.Room;
 import ch.reserveyourroom.user.model.User;
 
+import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Specific data access object for the User entity.

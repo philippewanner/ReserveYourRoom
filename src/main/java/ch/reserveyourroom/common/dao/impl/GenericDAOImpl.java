@@ -26,7 +26,7 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
     private Class<T> entityClass;
 
     @NotNull
-    private Class<String> idClass;
+    private Class<UUID> idClass;
 
     public GenericDaoImpl(){
 
@@ -41,10 +41,16 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         cq.select(cb.count(cq.from(entityClass)));
-        //cq.where(predicate);
+        cq.where(predicate);
         TypedQuery<Long> typedQuery = em.createQuery(cq);
-        Long count = typedQuery.getSingleResult();
-        return em.createQuery(cq).getSingleResult();
+        return typedQuery.getSingleResult();
+    }
+
+    public long countAll() {
+
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        Predicate alwaysTrue = cb.conjunction();
+        return countAll( alwaysTrue );
     }
 
     public List<T> loadAll() {
@@ -59,9 +65,9 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         return t.getUuid().toString();
     }
 
-    public void delete(final T id) {
+    public void delete(final UUID uuid) {
 
-        this.em.remove(this.em.getReference(entityClass, id));
+        this.em.remove(this.em.getReference(entityClass, uuid));
     }
 
     public Optional<T> read(final String id) {

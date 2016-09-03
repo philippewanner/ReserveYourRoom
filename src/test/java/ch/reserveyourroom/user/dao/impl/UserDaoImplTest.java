@@ -7,6 +7,7 @@ import ch.reserveyourroom.user.dao.UserDao;
 import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.wish.dao.WishDao;
 import ch.reserveyourroom.wish.dao.impl.WishDaoImpl;
+import ch.reserveyourroom.wish.model.Wish;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 
 import org.junit.Test;
@@ -25,9 +27,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Date;
+import java.time.Instant;
+import java.util.*;
+import java.util.function.ObjDoubleConsumer;
 
 import static org.junit.Assert.assertTrue;
 
@@ -36,12 +39,9 @@ import static org.junit.Assert.assertTrue;
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserDaoImplTest extends TestCase {
+public class UserDaoImplTest {
 
     private UserDao userDao = new UserDaoImpl();
-    private final WishDao wishDao = new WishDaoImpl();
-    private final ReservationDao reservationDao = new ReservationDaoImpl();
-
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
@@ -60,8 +60,11 @@ public class UserDaoImplTest extends TestCase {
 
     @Before
     public void beginTransaction() {
+
         em = emf.createEntityManager();
+
         userDao.setEntityManager(em);
+
         em.getTransaction().begin();
     }
 
@@ -92,9 +95,7 @@ public class UserDaoImplTest extends TestCase {
         userDao.create(u2);
 
         // When
-        CriteriaBuilder cb = this.em.getCriteriaBuilder();
-        Predicate alwaysTrue = cb.or();
-        final long count = userDao.countAll( alwaysTrue );
+        final long count = userDao.countAll();
 
         // Then
         assertTrue("The number of users has to be two", 2 == count);
@@ -141,10 +142,10 @@ public class UserDaoImplTest extends TestCase {
         Optional<User> userFound = userDao.read(pk);
 
         // When
-        userDao.delete(userFound.get());
+        userDao.delete(userFound.get().getUuid());
 
         // Then
-        assertFalse("The user has to be deleted from the DB", userDao.read(pk).isPresent());
+        assertTrue("The user has to be deleted from the DB", !userDao.read(pk).isPresent());
     }
 
     @Test
@@ -164,14 +165,37 @@ public class UserDaoImplTest extends TestCase {
         }
 
         // Then
-        assertFalse("The update can not occur", userDao.read(pk).get().getEmail().compareTo(newEmail) == 0);
+        assertTrue("The update can not occur", userDao.read(pk).get().getEmail().compareTo(newEmail) == 0);
+    }
+
+    @Test
+    public void should_readUserFromDb() {
+
+        // Given
+        String pk = this.createSampleUserInDb();
+
+        // When
+        Optional<User> userFound = userDao.read(pk);
+
+        // Then
+        assertTrue("The system cannot read the user from DB", userFound.isPresent());
+        assertTrue(userFound.get().getFirstname().compareTo("first") == 0);
+        assertTrue(userFound.get().getLastname().compareTo("last") == 0);
     }
 
     private String createSampleUserInDb(){
+
         User u = new User();
         u.setEmail("first.last@mail.com");
         u.setFirstname("first");
         u.setLastname("last");
+
+        Wish wish = new Wish();
+        wish.setStart(Date.from(Instant.now()));
+        wish.setEnd(Date.from(Instant.now()));
+        Set<Wish> wishes = new TreeSet<>();
+        u.setWhishes(wishes);
+
         return userDao.create(u);
     }
 }

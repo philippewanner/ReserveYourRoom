@@ -65,7 +65,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
 
         Optional<Infrastructure> t = this.infrastructureDao.read(id);
         if(t.isPresent()){
-            this.infrastructureDao.delete(t.get());
+            this.infrastructureDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }

@@ -23,6 +23,12 @@ public interface GenericDao<T extends AbstractEntity> {
     long countAll(final Predicate predicate);
 
     /**
+     * Count the number of entries from a table
+     * @return the number of records.
+     */
+    long countAll();
+
+    /**
      * Load and return all entities from the database corresponding to this entity.
      * @return list of all entities found
      */
@@ -37,9 +43,9 @@ public interface GenericDao<T extends AbstractEntity> {
 
     /**
      * Remove an object from persistent storage in the database.
-     * @param t the persistent object to remove.
+     * @param uuid the persistent object to remove.
      */
-    void delete(T t);
+    void delete(UUID uuid);
 
     /**
      * Retrieve an entity instance object that was previously persisted to the database using the indicated id as primary key.

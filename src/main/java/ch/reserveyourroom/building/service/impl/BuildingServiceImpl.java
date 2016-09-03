@@ -71,7 +71,7 @@ public class BuildingServiceImpl implements BuildingService {
 
         Optional<Building> t = this.buildingDao.read(id);
         if(t.isPresent()){
-            this.buildingDao.delete(t.get());
+            this.buildingDao.delete(t.get().getUuid());
         } else {
             throw new BusinessUnprocessableOperationException(BusinessOperation.DELETE);
         }
