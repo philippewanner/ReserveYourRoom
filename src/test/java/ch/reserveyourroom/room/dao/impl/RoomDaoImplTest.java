@@ -1,7 +1,7 @@
 package ch.reserveyourroom.room.dao.impl;
 
+import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
-import ch.reserveyourroom.reservation.model.Reservation;
 import ch.reserveyourroom.room.dao.RoomDao;
 import ch.reserveyourroom.room.model.Room;
 import org.junit.*;
@@ -11,13 +11,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.Assert.assertFalse;
-        import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 /*
  * Unit testing the room dao implementation.
