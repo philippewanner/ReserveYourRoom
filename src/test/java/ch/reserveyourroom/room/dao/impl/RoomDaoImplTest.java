@@ -127,7 +127,7 @@ public class RoomDaoImplTest {
         // Given
         String pk = this.createSampleRoomInDb();
         Optional<Room> objectFound = roomDao.read(pk);
-        String newRoomName = new String("newRoomName");
+        String newRoomName = "newRoomName";
 
         // When
         try {
@@ -152,6 +152,7 @@ public class RoomDaoImplTest {
 
         // Then
         assertTrue("The system cannot read the object from DB", objectFound.isPresent());
+        assertFalse("The system cannot read the object from DB", objectFound.get().getName().isEmpty());
     }
 
     private String createSampleRoomInDb() {

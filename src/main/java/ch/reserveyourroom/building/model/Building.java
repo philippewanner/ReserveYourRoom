@@ -6,6 +6,7 @@ import ch.reserveyourroom.room.model.Room;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -25,7 +26,6 @@ public class Building extends AbstractEntity {
     @Column(name = "BUILDING_NAME", nullable = false)
     private String name;
 
-    @NotNull
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="ROOM_ID")
     private Set<Room> rooms;
