@@ -1,12 +1,11 @@
 package ch.reserveyourroom.common.service;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 

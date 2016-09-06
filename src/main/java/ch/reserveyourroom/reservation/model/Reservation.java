@@ -1,9 +1,9 @@
 package ch.reserveyourroom.reservation.model;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.room.model.Room;
+import ch.reserveyourroom.user.model.User;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -28,8 +28,13 @@ public class Reservation extends AbstractEntity {
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ROOM_ID")
+    @JoinColumn(name = "ROOM_ID", nullable = false)
     private Room room;
+
+    @NotNull
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
     @Override
     public String toString() {
@@ -80,5 +85,13 @@ public class Reservation extends AbstractEntity {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

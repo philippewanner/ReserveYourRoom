@@ -1,11 +1,9 @@
 package ch.reserveyourroom.common.dao.impl;
 
 import ch.reserveyourroom.common.dao.GenericDao;
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

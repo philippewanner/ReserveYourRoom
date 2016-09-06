@@ -1,6 +1,6 @@
 package ch.reserveyourroom.address.model;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 
 import javax.annotation.Nullable;
 import javax.persistence.AttributeOverride;

@@ -1,10 +1,19 @@
 
 package ch.reserveyourroom.wish.dao.impl;
 
+import ch.reserveyourroom.address.dao.AddressDao;
+import ch.reserveyourroom.address.dao.impl.AddressDaoImpl;
 import ch.reserveyourroom.address.model.Address;
+import ch.reserveyourroom.building.dao.BuildingDao;
+import ch.reserveyourroom.building.dao.impl.BuildingDaoImpl;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import ch.reserveyourroom.room.dao.RoomDao;
+import ch.reserveyourroom.room.dao.impl.RoomDaoImpl;
 import ch.reserveyourroom.room.model.Room;
+import ch.reserveyourroom.user.dao.UserDao;
+import ch.reserveyourroom.user.dao.impl.UserDaoImpl;
+import ch.reserveyourroom.user.model.User;
 import ch.reserveyourroom.wish.dao.WishDao;
 import ch.reserveyourroom.wish.model.Wish;
 import junit.framework.TestCase;
@@ -17,6 +26,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 /**
@@ -29,9 +39,16 @@ import java.util.*;
 public class WishDaoImplTest extends TestCase{
 
     private WishDao wishDao = new WishDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
+    private RoomDao roomDao = new RoomDaoImpl();
+    private BuildingDao buildingDao = new BuildingDaoImpl();
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
+
+    private User user;
+    private Building building;
+    private Room room;
 
     @BeforeClass
     public static void createEntityManagerFactory() {
@@ -51,8 +68,44 @@ public class WishDaoImplTest extends TestCase{
         em = emf.createEntityManager();
 
         wishDao.setEntityManager(em);
+        userDao.setEntityManager(em);
+        roomDao.setEntityManager(em);
+        buildingDao.setEntityManager(em);
 
         em.getTransaction().begin();
+
+        // Create a user
+        user = new User();
+        user.setEmail("email");
+        user.setFirstname("firstname");
+        user.setLastname("lastname");
+        userDao.create(user);
+
+        // Create a building's address
+        Address a1 = new Address();
+        a1.setCity("city");
+        a1.setCountry("country");
+        a1.setHousenumber("2a");
+        a1.setState("state");
+        a1.setStreet("street");
+        a1.setZipcode("1964");
+
+        // Create a building's room
+        room = new Room();
+        room.setFloor(2);
+        room.setName("r");
+        room.setSeatnumber(23);
+        room.setSize(67f);
+
+        // Create the building
+        building = new Building();
+        building.setAddress(a1);
+        building.setName("b");
+        Set<Room> rooms = new TreeSet<>();
+        rooms.add(room);
+        building.setRooms(rooms);
+
+        buildingDao.create(building);
     }
 
     @After
@@ -158,35 +211,12 @@ public class WishDaoImplTest extends TestCase{
         List<String> ids = new ArrayList<>();
 
         for(int i=0; i<numberOfObject; i++) {
-            Room r1 = new Room();
-            r1.setFloor(2);
-            r1.setName("r"+i);
-            r1.setSeatnumber(23);
-            r1.setSize(67f);
-
-            Address a1 = new Address();
-            a1.setCity("city");
-            a1.setCountry("country");
-            a1.setHousenumber("2a");
-            a1.setState("state");
-            a1.setStreet("street");
-            a1.setZipcode("1964");
-
-            Building b1 = new Building();
-            b1.setAddress(a1);
-            b1.setName("b"+1);
-            Set<Room> rooms = new TreeSet<>();
-            rooms.add(r1);
-            b1.setRooms(rooms);
 
             Wish w1 = new Wish();
-            LocalDate start = LocalDate.of(2016, 01, 01);
-            w1.setStart(Date.valueOf(start));
-            LocalDate end = LocalDate.of(2016, 04, 20);
-            w1.setEnd(Date.valueOf(end));
-            w1.setRoom(r1);
-            w1.setAddress(a1);
-            w1.setBuilding(b1);
+            w1.setStart(Date.valueOf(LocalDate.of(2016, Month.JANUARY, 01)));
+            w1.setEnd(Date.valueOf(LocalDate.of(2016, Month.APRIL, 20)));
+            w1.setRoom(room);
+            w1.setUser(user);
 
             String id = wishDao.create(w1);
             ids.add(id);

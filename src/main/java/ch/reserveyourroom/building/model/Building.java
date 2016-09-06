@@ -1,15 +1,11 @@
 package ch.reserveyourroom.building.model;
 
 import ch.reserveyourroom.address.model.Address;
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.room.model.Room;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,13 +22,14 @@ public class Building extends AbstractEntity {
     @Column(name = "BUILDING_NAME", nullable = false)
     private String name;
 
+    @NotNull
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="ROOM_ID")
+    @JoinColumn(name="ROOM_IN_BUILDING", nullable = false)
     private Set<Room> rooms;
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="ADDRESS_ID")
+    @JoinColumn(name="ADDRESS_FOR_BUILDING", nullable = false)
     private Address address;
 
 

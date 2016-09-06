@@ -2,7 +2,11 @@ package ch.reserveyourroom.address.dao.impl;
 
 import ch.reserveyourroom.address.dao.AddressDao;
 import ch.reserveyourroom.address.model.Address;
+import ch.reserveyourroom.building.dao.BuildingDao;
+import ch.reserveyourroom.building.dao.impl.BuildingDaoImpl;
+import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import ch.reserveyourroom.room.model.Room;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

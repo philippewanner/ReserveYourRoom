@@ -1,6 +1,6 @@
 package ch.reserveyourroom.common.endpoint;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;

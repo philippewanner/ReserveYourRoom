@@ -1,6 +1,6 @@
 package ch.reserveyourroom.common.exception.persistence;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 
 import javax.ejb.ApplicationException;
 

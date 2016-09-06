@@ -1,4 +1,4 @@
-package ch.reserveyourroom.common.entity;
+package ch.reserveyourroom.common.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,11 +25,6 @@ public abstract class AbstractEntity implements Serializable {
     public UUID getUuid() {
 
         return uuid;
-    }
-
-    protected void setUuid(UUID id){
-
-        this.uuid = id;
     }
 
     public abstract int hashCode();

@@ -14,7 +14,7 @@
         <class>ch.reserveyourroom.infrastructure.model.Infrastructure</class>
         <class>ch.reserveyourroom.reservation.model.Reservation</class>
         <class>ch.reserveyourroom.room.model.Room</class>
-        <class>ch.reserveyourroom.common.entity.AbstractEntity</class>
+        <class>ch.reserveyourroom.common.model.AbstractEntity</class>
 
         <properties>
             <!-- Automatically validates or exports schema DDL to the database when the SessionFactory is created -->
@@ -24,6 +24,7 @@
             <property name="hibernate.connection.username" value="sa"/>
             <property name="hibernate.connection.password" value=""/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -2,9 +2,10 @@ package ch.reserveyourroom.wish.model;
 
 import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.building.model.Building;
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import ch.reserveyourroom.room.model.Room;
+import ch.reserveyourroom.user.model.User;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -22,7 +23,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "WHISHES")
 @AttributeOverride(name = "uuid", column = @Column(name = "WHISH_ID"))
-public class Wish extends AbstractEntity {
+public class Wish extends AbstractEntity implements Comparable<Wish> {
 
     @NotNull
     @Column(name = "WHISH_START", nullable = false)
@@ -32,26 +33,15 @@ public class Wish extends AbstractEntity {
     @Column(name = "WHISH_END", nullable = false)
     private Date end;
 
-    @Nullable
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "INFRASTRUCTURE_ID")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Infrastructure> infrastructures;
-
-    @Nullable
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ADDRESS_ID")
-    private Address address;
-
-    @Nullable
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "BUILDING_ID")
-    private Building building;
-
     @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ROOM_ID")
+    @JoinColumn(name="WISHED_ROOM",referencedColumnName="ROOM_ID", nullable = false)
     private Room room;
+
+    @NotNull
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
     @Override
     public int hashCode() {
@@ -60,7 +50,6 @@ public class Wish extends AbstractEntity {
         hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
         hash = hash * 13 + (start != null ? start.hashCode() : 0);
         hash = hash * 7 + (end != null ? end.hashCode() : 0);
-        hash = hash * 5 + (building != null ? building.hashCode() : 0);
         hash = hash * 13 + (room != null ? room.hashCode() : 0);
         return hash;
     }
@@ -71,7 +60,7 @@ public class Wish extends AbstractEntity {
         if (!(o instanceof Wish)) return false;
 
         Wish other = (Wish) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && (this.infrastructures != null && this.infrastructures.equals(other.infrastructures)) && (this.address != null && this.address.equals(other.address)) && (this.building != null && this.building.equals(other.building)) && this.room != null && this.room.equals(other.room);
+        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
 
     }
 
@@ -97,38 +86,36 @@ public class Wish extends AbstractEntity {
         return this.end;
     }
 
-    @Nullable
-    public List<Infrastructure> getInfrastructures() {
-        return infrastructures;
-    }
-
-    public void setInfrastructures(@Nullable List<Infrastructure> infrastructures) {
-        this.infrastructures = infrastructures;
-    }
-
-    @Nullable
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(@Nullable Address address) {
-        this.address = address;
-    }
-
-    @Nullable
-    public Building getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(@Nullable Building building) {
-        this.building = building;
-    }
-
     public Room getRoom() {
         return room;
     }
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    @Override
+    public int compareTo(Wish o) {
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
+
+        if ( this == o ) return EQUAL;
+
+        if (this.start.before(o.start)) return BEFORE;
+        if (this.start.after(o.start)) return AFTER;
+
+        if (this.end.before(o.end)) return BEFORE;
+        if (this.end.after(o.end)) return AFTER;
+
+        return EQUAL;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

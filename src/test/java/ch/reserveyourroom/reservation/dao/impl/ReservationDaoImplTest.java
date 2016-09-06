@@ -1,11 +1,20 @@
 package ch.reserveyourroom.reservation.dao.impl;
 
 import ch.reserveyourroom.address.model.Address;
+import ch.reserveyourroom.building.dao.BuildingDao;
+import ch.reserveyourroom.building.dao.impl.BuildingDaoImpl;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 import ch.reserveyourroom.reservation.dao.ReservationDao;
 import ch.reserveyourroom.reservation.model.Reservation;
+import ch.reserveyourroom.room.dao.RoomDao;
+import ch.reserveyourroom.room.dao.impl.RoomDaoImpl;
 import ch.reserveyourroom.room.model.Room;
+import ch.reserveyourroom.user.dao.UserDao;
+import ch.reserveyourroom.user.dao.impl.UserDaoImpl;
+import ch.reserveyourroom.user.model.User;
+import ch.reserveyourroom.wish.dao.WishDao;
+import ch.reserveyourroom.wish.dao.impl.WishDaoImpl;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.company.Company;
 import org.junit.*;
@@ -17,6 +26,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -32,9 +42,15 @@ import static org.junit.Assert.assertTrue;
 public class ReservationDaoImplTest {
 
     private ReservationDao reservationDao = new ReservationDaoImpl();
+    private BuildingDao buildingDao = new BuildingDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
+
+    private User user;
+    private Building building;
+    private Room room;
 
     @BeforeClass
     public static void createEntityManagerFactory() {
@@ -54,8 +70,43 @@ public class ReservationDaoImplTest {
         em = emf.createEntityManager();
 
         reservationDao.setEntityManager(em);
+        userDao.setEntityManager(em);
+        buildingDao.setEntityManager(em);
 
         em.getTransaction().begin();
+
+        // Create a user
+        user = new User();
+        user.setEmail("email");
+        user.setFirstname("firstname");
+        user.setLastname("lastname");
+        userDao.create(user);
+
+        // Create a building's address
+        Address a1 = new Address();
+        a1.setCity("city");
+        a1.setCountry("country");
+        a1.setHousenumber("2a");
+        a1.setState("state");
+        a1.setStreet("street");
+        a1.setZipcode("1964");
+
+        // Create a building's room
+        room = new Room();
+        room.setFloor(2);
+        room.setName("r");
+        room.setSeatnumber(23);
+        room.setSize(67f);
+
+        // Create the building
+        building = new Building();
+        building.setAddress(a1);
+        building.setName("b");
+        Set<Room> rooms = new TreeSet<>();
+        rooms.add(room);
+        building.setRooms(rooms);
+
+        buildingDao.create(building);
     }
 
     @After
@@ -162,18 +213,13 @@ public class ReservationDaoImplTest {
 
     private String createSampleReservationInDb() {
 
-        Room r = new Room();
-        r.setFloor(2);
-        r.setName("roomName");
-        r.setSeatnumber(198);
-        r.setSize((float) (34));
-
         Reservation reservation = new Reservation();
         LocalDate end = LocalDate.now();
         reservation.setEnd(Date.valueOf(end));
-        LocalDate start = LocalDate.of(2016, 01, 01);
+        LocalDate start = LocalDate.of(2016, Month.APRIL, 01);
         reservation.setStart(Date.valueOf(start));
-        reservation.setRoom(r);
+        reservation.setRoom(room);
+        reservation.setUser(user);
 
         return reservationDao.create(reservation);
     }

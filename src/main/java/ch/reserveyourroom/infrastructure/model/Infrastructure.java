@@ -1,6 +1,6 @@
 package ch.reserveyourroom.infrastructure.model;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Objects;

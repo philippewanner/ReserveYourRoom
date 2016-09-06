@@ -1,5 +1,10 @@
 package ch.reserveyourroom.room.dao.impl;
 
+import ch.reserveyourroom.address.dao.AddressDao;
+import ch.reserveyourroom.address.dao.impl.AddressDaoImpl;
+import ch.reserveyourroom.address.model.Address;
+import ch.reserveyourroom.building.dao.BuildingDao;
+import ch.reserveyourroom.building.dao.impl.BuildingDaoImpl;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 import ch.reserveyourroom.room.dao.RoomDao;
@@ -26,6 +31,11 @@ import static org.junit.Assert.assertTrue;
 public class RoomDaoImplTest {
 
     private RoomDao roomDao = new RoomDaoImpl();
+    private AddressDao addressDao = new AddressDaoImpl();
+    private BuildingDao buildingDao = new BuildingDaoImpl();
+
+    private Address a;
+    private Building b;
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
@@ -48,8 +58,25 @@ public class RoomDaoImplTest {
         em = emf.createEntityManager();
 
         roomDao.setEntityManager(em);
+        addressDao.setEntityManager(em);
+        buildingDao.setEntityManager(em);
 
         em.getTransaction().begin();
+
+        //Create an address
+        a = new Address();
+        a.setCity("Sion");
+        a.setCountry("Schweiz");
+        a.setHousenumber("5");
+        a.setZipcode("1950");
+        a.setStreet("myStreet");
+        addressDao.create(a);
+
+        // Create a building
+        b = new Building();
+        b.setAddress(a);
+        b.setName("buildingName");
+        buildingDao.create(b);
     }
 
     @After
@@ -68,7 +95,7 @@ public class RoomDaoImplTest {
         // Given
         int nbObjectToCreate = 2;
         for (int i = 0; i < nbObjectToCreate; i++) {
-            createSampleRoomInDb();
+            createSampleRoomInDb(i);
         }
 
         // When
@@ -84,7 +111,7 @@ public class RoomDaoImplTest {
         // Given
 
         // When
-        final String objectId = createSampleRoomInDb();
+        final String objectId = createSampleRoomInDb(1);
 
         // Then
         Room objectRead = roomDao.read(objectId).get();
@@ -97,7 +124,7 @@ public class RoomDaoImplTest {
         // Given
         int nbObjectToCreate = 5;
         for (int i = 0; i < nbObjectToCreate; i++) {
-            this.createSampleRoomInDb();
+            this.createSampleRoomInDb(i);
         }
 
         // When
@@ -111,7 +138,7 @@ public class RoomDaoImplTest {
     public void should_deleteObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb();
+        String pk = this.createSampleRoomInDb(1);
         Optional<Room> objectFound = roomDao.read(pk);
 
         // When
@@ -125,7 +152,7 @@ public class RoomDaoImplTest {
     public void should_updateObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb();
+        String pk = this.createSampleRoomInDb(1);
         Optional<Room> objectFound = roomDao.read(pk);
         String newRoomName = "newRoomName";
 
@@ -145,7 +172,7 @@ public class RoomDaoImplTest {
     public void should_readObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb();
+        String pk = this.createSampleRoomInDb(1);
 
         // When
         Optional<Room> objectFound = roomDao.read(pk);
@@ -155,13 +182,17 @@ public class RoomDaoImplTest {
         assertFalse("The system cannot read the object from DB", objectFound.get().getName().isEmpty());
     }
 
-    private String createSampleRoomInDb() {
+    private String createSampleRoomInDb(int number) {
 
         Room r = new Room();
         r.setFloor(2);
-        r.setName("roomName");
+        r.setName("roomName"+number);
         r.setSeatnumber(198);
         r.setSize((float) (34));
+
+        Set<Room> rooms = new TreeSet<>();
+        rooms.add(r);
+        b.setRooms(rooms);
 
         return roomDao.create(r);
     }

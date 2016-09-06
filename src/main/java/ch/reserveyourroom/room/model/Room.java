@@ -1,17 +1,12 @@
 package ch.reserveyourroom.room.model;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
-import ch.reserveyourroom.reservation.model.Reservation;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +20,7 @@ import java.util.Set;
 public class Room extends AbstractEntity implements Comparable<Room> {
 
     @NotEmpty
-    @Column(name = "ROOM_NAME", nullable = false)
+    @Column(name = "ROOM_NAME", nullable = false, unique = true)
     private String name;
 
     @NotNull
@@ -42,7 +37,7 @@ public class Room extends AbstractEntity implements Comparable<Room> {
 
     @Nullable
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "INFRASTRUCTURE_ID")
+    @JoinColumn(name = "INFRASTRUCTURE_ID", nullable = true)
     private Set<Infrastructure> infrastructures;
 
     @Override

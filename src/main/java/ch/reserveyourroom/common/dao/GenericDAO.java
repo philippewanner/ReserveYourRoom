@@ -1,6 +1,6 @@
 package ch.reserveyourroom.common.dao;
 
-import ch.reserveyourroom.common.entity.AbstractEntity;
+import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 
 import javax.persistence.EntityManager;
