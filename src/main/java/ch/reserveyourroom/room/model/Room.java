@@ -40,9 +40,9 @@ public class Room extends AbstractEntity implements Comparable<Room> {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
     private Set<Infrastructure> infrastructures;
 
-    @NotNull
+    @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BUILDING_ID", nullable = false)
+    @JoinColumn(name = "BUILDING_ID", nullable = true)
     private Building building;
 
     @Override

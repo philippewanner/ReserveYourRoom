@@ -42,13 +42,7 @@ public class SampleDataGenerator {
     private BuildingService buildingService;
 
     @Inject
-    private BuildingDao buildingDao;
-
-    @Inject
     private RoomService roomService;
-
-    @Inject
-    private RoomDao roomDao;
 
     private static SampleDataGenerator instance;
 
@@ -139,45 +133,4 @@ public class SampleDataGenerator {
             buildingService.save(building);
         }
     }
-
-    /*
-    private void createBuildings() {
-
-        for (int i = 0; i<50; i++){
-            //Fake test data as a room
-            Fairy fairy = Fairy.create();
-
-            // Building address
-            Address addressBuilding = new Address();
-            addressBuilding.setCity(fairy.person().getAddress().getCity());
-            addressBuilding.setCountry("Switzerland");
-            addressBuilding.setHousenumber(""+i%12+1);
-            addressBuilding.setState("");
-            addressBuilding.setStreet(fairy.person().getAddress().street());
-            addressBuilding.setZipcode(fairy.person().getAddress().getPostalCode());
-
-            // Building rooms
-            Set<Room> rooms = new TreeSet<>();
-            for(int j=0; j<10; j++){
-                Room room = new Room();
-                room.setFloor(i%4+j);
-                room.setName("B"+i+"-Room"+j);
-                room.setSeatnumber(j%5+14+i);
-                room.setSize((float)(40+i*1.2+j*0.2));
-                rooms.add(room);
-            }
-
-            // Building setters
-            Building building = new Building();
-            building.setAddress(addressBuilding);
-            building.setName(fairy.company().name());
-            buildingDao.create(building);
-
-            building.setRooms(rooms);
-            for(Room room: rooms) {
-                roomDao.create(room);
-            }
-
-        }
-    }*/
 }
