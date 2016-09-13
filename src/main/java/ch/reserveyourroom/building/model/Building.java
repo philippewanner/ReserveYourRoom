@@ -4,6 +4,7 @@ import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.room.model.Room;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -22,9 +23,7 @@ public class Building extends AbstractEntity {
     @Column(name = "BUILDING_NAME", nullable = false)
     private String name;
 
-    @NotNull
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="ROOM_IN_BUILDING", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "building")
     private Set<Room> rooms;
 
     @NotNull

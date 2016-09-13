@@ -1,5 +1,6 @@
 package ch.reserveyourroom.room.model;
 
+import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.model.AbstractEntity;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -36,9 +37,13 @@ public class Room extends AbstractEntity implements Comparable<Room> {
     private Integer floor;
 
     @Nullable
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "INFRASTRUCTURE_ID", nullable = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
     private Set<Infrastructure> infrastructures;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BUILDING_ID", nullable = false)
+    private Building building;
 
     @Override
     public String toString() {
@@ -107,7 +112,11 @@ public class Room extends AbstractEntity implements Comparable<Room> {
         if (!(o instanceof Room)) return false;
 
         Room other = (Room) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.name != null && this.name.equals(other.name)) && (this.floor != null && this.floor.equals(other.floor)) && (this.size != null && this.size.equals(other.size)) && (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) && (this.floor != null && this.floor.equals(other.floor));
+        return (this.name != null && this.name.equals(other.name)) &&
+                (this.floor != null && this.floor.equals(other.floor)) &&
+                (this.size != null && this.size.equals(other.size)) &&
+                (this.seatnumber != null && this.seatnumber.equals(other.seatnumber)) &&
+                (this.floor != null && this.floor.equals(other.floor));
 
     }
 
@@ -116,4 +125,11 @@ public class Room extends AbstractEntity implements Comparable<Room> {
         return this.name.compareTo(o.name);
     }
 
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
 }
