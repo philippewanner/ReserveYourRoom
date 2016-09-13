@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Infrastructure Endpoint
  */
-@Path(Routes.WISH)
+@Path(Routes.INFRASTRUCTURE)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Stateless
