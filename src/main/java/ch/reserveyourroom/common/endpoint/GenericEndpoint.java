@@ -4,6 +4,7 @@ import ch.reserveyourroom.common.model.AbstractEntity;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 /**
  * All REST endpoints have to implements these methods.
@@ -16,7 +17,7 @@ public interface GenericEndpoint<T extends AbstractEntity> {
 
     Response getAll();
 
-    Response getById(@NotNull final String id);
+    Response getById(@NotNull final UUID id);
 
-    Response updateById(@NotNull final String id, @NotNull final T entity);
+    Response updateById(@NotNull final UUID id, @NotNull final T entity);
 }

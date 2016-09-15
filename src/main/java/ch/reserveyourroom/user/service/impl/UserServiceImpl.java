@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class UserServiceImpl implements UserService {
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Inject
     private UserDao userDao;
 
-    public User find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public User find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<User> entity = this.userDao.read(key);
         if (entity.isPresent()) {
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Optional<User> search(@NotNull String key) {
+    public Optional<User> search(@NotNull UUID key) {
 
         return this.userDao.read(key);
     }
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
         return this.userDao.loadAll();
     }
 
-    public String save(@NotNull @Valid User user) {
+    public UUID save(@NotNull @Valid User user) {
 
         return this.userDao.create(user);
     }
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<User> t = this.userDao.read(id);
         if(t.isPresent()){

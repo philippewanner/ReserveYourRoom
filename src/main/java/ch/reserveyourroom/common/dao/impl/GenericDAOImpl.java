@@ -57,10 +57,10 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         return query.getResultList();
     }
 
-    public String create(final T t) {
+    public UUID create(final T t) {
 
         this.em.persist(t);
-        return t.getUuid().toString();
+        return t.getUuid();
     }
 
     public void delete(final UUID uuid) {
@@ -68,9 +68,9 @@ public abstract class GenericDaoImpl<T extends AbstractEntity> implements Generi
         this.em.remove(this.em.getReference(entityClass, uuid));
     }
 
-    public Optional<T> read(final String id) {
+    public Optional<T> read(final UUID id) {
 
-        return Optional.ofNullable(this.em.find(entityClass, UUID.fromString(id)));
+        return Optional.ofNullable(this.em.find(entityClass, id));
     }
 
     public T update(final T t) throws EntityOptimisticLockException {

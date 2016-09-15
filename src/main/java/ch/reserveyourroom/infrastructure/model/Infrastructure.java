@@ -5,7 +5,9 @@ import ch.reserveyourroom.room.model.Room;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Entity that represent a reservation model.
@@ -20,9 +22,9 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
     @Column(name = "INFRASTRUCTURE_NAME", nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROOM_ID", nullable = true)
-    private Room room;
+    @NotNull
+    @Column(name = "ROOM_ID", nullable = false)
+    private UUID roomId;
 
     @Override
     public String toString() {
@@ -34,7 +36,8 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
     public int hashCode() {
 
         int hash = 1;
-        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
+        hash = hash * 3 + (name != null ? name.hashCode() : 0);
+        hash = hash * 5 + (roomId != null ? roomId.hashCode() : 0);
         return hash;
     }
 
@@ -49,7 +52,7 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
     }
 
     @Override
-    public int compareTo(Infrastructure o) {
+    public int compareTo(@NotNull Infrastructure o) {
         return this.name.compareTo(o.name);
     }
 
@@ -61,11 +64,11 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
         return this.name;
     }
 
-    public Room getRoom() {
-        return room;
+    public UUID getRoomId() {
+        return roomId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomId(UUID roomId) {
+        this.roomId = roomId;
     }
 }

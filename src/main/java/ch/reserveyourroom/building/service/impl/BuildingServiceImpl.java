@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class BuildingServiceImpl implements BuildingService {
@@ -32,7 +33,7 @@ public class BuildingServiceImpl implements BuildingService {
     @Inject
     private BuildingDao buildingDao;
 
-    public Building find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Building find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Building> entity = this.buildingDao.read(key);
         if (entity.isPresent()) {
@@ -42,7 +43,7 @@ public class BuildingServiceImpl implements BuildingService {
         }
     }
 
-    public Optional<Building> search(@NotNull String key) {
+    public Optional<Building> search(@NotNull UUID key) {
 
         return this.buildingDao.read(key);
     }
@@ -52,7 +53,7 @@ public class BuildingServiceImpl implements BuildingService {
         return this.buildingDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Building building) {
+    public UUID save(@NotNull @Valid Building building) {
 
         return this.buildingDao.create(building);
     }
@@ -67,7 +68,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Building> t = this.buildingDao.read(id);
         if(t.isPresent()){

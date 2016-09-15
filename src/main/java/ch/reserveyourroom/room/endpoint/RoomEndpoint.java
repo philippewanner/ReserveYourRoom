@@ -16,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Room Endpoint
@@ -42,7 +43,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
     @POST
     public Response save(@NotNull final Room room) {
 
-        String savedEntityId = this.service.save(room);
+        UUID savedEntityId = this.service.save(room);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +56,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final String id) {
+    public Response getById(@NotNull @PathParam("id") final UUID id) {
 
         try {
             final Room room = this.service.find(id);
@@ -69,7 +70,7 @@ public class RoomEndpoint implements GenericEndpoint<Room> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Room entity) {
+    public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Room entity) {
 
         try {
             Room entityUpdated = this.service.update(entity);

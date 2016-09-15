@@ -15,6 +15,7 @@ import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.core.Response;
 
 import java.util.List;
+import java.util.UUID;
 
 import static ch.reserveyourroom.common.exception.business.BusinessOperation.*;
 
@@ -43,7 +44,7 @@ public final class ResponseFactory {
         return Response.status(status.getStatusCode()).entity(entity).build();
     }
 
-    public static Response buildSuccessResponse(BusinessOperation op, String id) {
+    public static Response buildSuccessResponse(BusinessOperation op, UUID id) {
 
         HttpStatusCode status = getSuccessResponse(op);
 

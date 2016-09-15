@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class RoomServiceImpl implements RoomService {
@@ -26,7 +27,7 @@ public class RoomServiceImpl implements RoomService {
     @Inject
     private RoomDao roomDao;
 
-    public Room find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Room find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Room> entity = this.roomDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +37,7 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
-    public Optional<Room> search(@NotNull String key) {
+    public Optional<Room> search(@NotNull UUID key) {
 
         return this.roomDao.read(key);
     }
@@ -46,7 +47,7 @@ public class RoomServiceImpl implements RoomService {
         return this.roomDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Room room) {
+    public UUID save(@NotNull @Valid Room room) {
 
         return this.roomDao.create(room);
     }
@@ -61,7 +62,7 @@ public class RoomServiceImpl implements RoomService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Room> t = this.roomDao.read(id);
         if(t.isPresent()){

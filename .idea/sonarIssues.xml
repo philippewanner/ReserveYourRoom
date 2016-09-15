@@ -833,6 +833,11 @@
             <set />
           </value>
         </entry>
+        <entry key="dbtable:/cb208fa3/5cc195fc-00f4-4ae3-a3ff-830132b65628/reserveyourroomdb.ROOMS">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>

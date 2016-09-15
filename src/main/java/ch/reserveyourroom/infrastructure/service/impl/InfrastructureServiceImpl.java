@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class InfrastructureServiceImpl implements InfrastructureService {
@@ -26,7 +27,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
     @Inject
     private InfrastructureDao infrastructureDao;
 
-    public Infrastructure find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Infrastructure find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Infrastructure> entity = this.infrastructureDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +37,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
         }
     }
 
-    public Optional<Infrastructure> search(@NotNull String key) {
+    public Optional<Infrastructure> search(@NotNull UUID key) {
 
         return this.infrastructureDao.read(key);
     }
@@ -46,7 +47,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
         return this.infrastructureDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Infrastructure infrastructure) {
+    public UUID save(@NotNull @Valid Infrastructure infrastructure) {
 
         return this.infrastructureDao.create(infrastructure);
     }
@@ -61,7 +62,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Infrastructure> t = this.infrastructureDao.read(id);
         if(t.isPresent()){

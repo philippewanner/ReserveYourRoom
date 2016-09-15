@@ -39,7 +39,7 @@ public interface GenericDao<T extends AbstractEntity> {
      * @param t the entity instance to persist.
      * @return the primary key of the created entity instance.
      */
-    String create(T t);
+    UUID create(T t);
 
     /**
      * Remove an object from persistent storage in the database.
@@ -53,7 +53,7 @@ public interface GenericDao<T extends AbstractEntity> {
      * @return an Optional which contains the entity object found, empty otherwise.
      */
 
-    Optional<T> read(String id);
+    Optional<T> read(UUID id);
 
     /**
      * Save changes made to a persistent object.

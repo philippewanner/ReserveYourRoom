@@ -16,10 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -34,8 +31,8 @@ public class RoomDaoImplTest {
     private AddressDao addressDao = new AddressDaoImpl();
     private BuildingDao buildingDao = new BuildingDaoImpl();
 
-    private Address a;
-    private Building b;
+    private UUID addressId;
+    private UUID buildingId;
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
@@ -64,19 +61,19 @@ public class RoomDaoImplTest {
         em.getTransaction().begin();
 
         //Create an address
-        a = new Address();
+        Address a = new Address();
         a.setCity("Sion");
         a.setCountry("Schweiz");
         a.setHousenumber("5");
         a.setZipcode("1950");
         a.setStreet("myStreet");
-        addressDao.create(a);
+        UUID addressId = addressDao.create(a);
 
         // Create a building
-        b = new Building();
-        b.setAddress(a);
+        Building b = new Building();
+        b.setAddressId(addressId);
         b.setName("buildingName");
-        buildingDao.create(b);
+        buildingId = buildingDao.create(b);
     }
 
     @After
@@ -111,11 +108,11 @@ public class RoomDaoImplTest {
         // Given
 
         // When
-        final String objectId = createSampleRoomInDb(1);
+        final UUID objectId = createSampleRoomInDb(1);
 
         // Then
         Room objectRead = roomDao.read(objectId).get();
-        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid().toString()) == 0);
+        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid()) == 0);
     }
 
     @Test
@@ -138,7 +135,7 @@ public class RoomDaoImplTest {
     public void should_deleteObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb(1);
+        UUID pk = this.createSampleRoomInDb(1);
         Optional<Room> objectFound = roomDao.read(pk);
 
         // When
@@ -152,7 +149,7 @@ public class RoomDaoImplTest {
     public void should_updateObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb(1);
+        UUID pk = this.createSampleRoomInDb(1);
         Optional<Room> objectFound = roomDao.read(pk);
         String newRoomName = "newRoomName";
 
@@ -172,7 +169,7 @@ public class RoomDaoImplTest {
     public void should_readObjectFromDb() {
 
         // Given
-        String pk = this.createSampleRoomInDb(1);
+        UUID pk = this.createSampleRoomInDb(1);
 
         // When
         Optional<Room> objectFound = roomDao.read(pk);
@@ -182,18 +179,14 @@ public class RoomDaoImplTest {
         assertFalse("The system cannot read the object from DB", objectFound.get().getName().isEmpty());
     }
 
-    private String createSampleRoomInDb(int number) {
+    private UUID createSampleRoomInDb(int number) {
 
         Room r = new Room();
         r.setFloor(2);
         r.setName("roomName"+number);
         r.setSeatnumber(198);
         r.setSize((float) (34));
-
-        Set<Room> rooms = new TreeSet<>();
-        rooms.add(r);
-        b.setRooms(rooms);
-
+        r.setBuildingId(buildingId);
         return roomDao.create(r);
     }
 }

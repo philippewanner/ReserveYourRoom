@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class WishServiceImpl implements WishService {
@@ -26,7 +27,7 @@ public class WishServiceImpl implements WishService {
     @Inject
     private WishDao wishDao;
 
-    public Wish find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Wish find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Wish> entity = this.wishDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +37,7 @@ public class WishServiceImpl implements WishService {
         }
     }
 
-    public Optional<Wish> search(@NotNull String key) {
+    public Optional<Wish> search(@NotNull UUID key) {
 
         return this.wishDao.read(key);
     }
@@ -46,7 +47,7 @@ public class WishServiceImpl implements WishService {
         return this.wishDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Wish wish) {
+    public UUID save(@NotNull @Valid Wish wish) {
 
         return this.wishDao.create(wish);
     }
@@ -61,7 +62,7 @@ public class WishServiceImpl implements WishService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Wish> t = this.wishDao.read(id);
         if(t.isPresent()){

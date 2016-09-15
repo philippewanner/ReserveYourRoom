@@ -102,7 +102,6 @@ public class Address extends AbstractEntity {
     public int hashCode() {
 
         int hash = 1;
-        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
         hash = hash * 29 + (street != null ? street.hashCode() : 0);
         hash = hash * 7 + (city != null ? city.hashCode() : 0);
         hash = hash * 5 + (state != null ? state.hashCode() : 0);
@@ -118,7 +117,12 @@ public class Address extends AbstractEntity {
         if (!(o instanceof Address)) return false;
 
         Address other = (Address) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.street != null && this.street.equals(other.street)) && (this.city != null && this.city.equals(other.city)) && (this.state != null && this.state.equals(other.state)) && (this.zipcode != null && this.zipcode.equals(other.zipcode)) && (this.country != null && this.country.equals(other.country)) && this.housenumber != null && this.housenumber.equals(other.housenumber);
+        return  (this.street != null && this.street.equals(other.street)) &&
+                (this.city != null && this.city.equals(other.city)) &&
+                (this.state != null && this.state.equals(other.state)) &&
+                (this.zipcode != null && this.zipcode.equals(other.zipcode)) &&
+                (this.country != null && this.country.equals(other.country)) &&
+                (this.housenumber != null && this.housenumber.equals(other.housenumber));
 
     }
 }

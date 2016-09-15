@@ -43,6 +43,8 @@ public class UserDaoImplTest {
 
     private UserDao userDao = new UserDaoImpl();
 
+    private WishDao wishDao = new WishDaoImpl();
+
     protected static EntityManagerFactory emf;
     protected EntityManager em;
 
@@ -64,6 +66,8 @@ public class UserDaoImplTest {
         em = emf.createEntityManager();
 
         userDao.setEntityManager(em);
+
+        wishDao.setEntityManager(em);
 
         em.getTransaction().begin();
     }
@@ -111,11 +115,11 @@ public class UserDaoImplTest {
         u1.setLastname("1");
 
         // When
-        final String userId = userDao.create(u1);
+        final UUID userId = userDao.create(u1);
 
         // Then
         User userRead = userDao.read(userId).get();
-        assertTrue("The Id of the user can not be read", userId.compareTo(userRead.getUuid().toString()) == 0);
+        assertTrue("The Id of the user can not be read", userId.compareTo(userRead.getUuid()) == 0);
     }
 
     @Test
@@ -138,7 +142,7 @@ public class UserDaoImplTest {
     public void should_deleteUserFromDb() {
 
         // Given
-        String pk = this.createSampleUserInDb();
+        UUID pk = this.createSampleUserInDb();
         Optional<User> userFound = userDao.read(pk);
 
         // When
@@ -152,7 +156,7 @@ public class UserDaoImplTest {
     public void should_updateUserFromDb() {
 
         // Given
-        String pk = this.createSampleUserInDb();
+        UUID pk = this.createSampleUserInDb();
         Optional<User> userFound = userDao.read(pk);
         String newEmail = "test";
 
@@ -172,7 +176,7 @@ public class UserDaoImplTest {
     public void should_readUserFromDb() {
 
         // Given
-        String pk = this.createSampleUserInDb();
+        UUID pk = this.createSampleUserInDb();
 
         // When
         Optional<User> userFound = userDao.read(pk);
@@ -183,19 +187,20 @@ public class UserDaoImplTest {
         assertTrue(userFound.get().getLastname().compareTo("last") == 0);
     }
 
-    private String createSampleUserInDb(){
+    private UUID createSampleUserInDb(){
 
         User u = new User();
         u.setEmail("first.last@mail.com");
         u.setFirstname("first");
         u.setLastname("last");
+        UUID userId = userDao.create(u);
 
         Wish wish = new Wish();
         wish.setStart(Date.from(Instant.now()));
         wish.setEnd(Date.from(Instant.now()));
-        Set<Wish> wishes = new TreeSet<>();
-        u.setWhishes(wishes);
+        wish.setUserId(userId);
+        wishDao.create(wish);
 
-        return userDao.create(u);
+        return userId;
     }
 }

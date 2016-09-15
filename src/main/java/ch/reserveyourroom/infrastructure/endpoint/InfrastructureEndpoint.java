@@ -16,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Infrastructure Endpoint
@@ -42,7 +43,7 @@ public class InfrastructureEndpoint implements GenericEndpoint<Infrastructure> {
     @POST
     public Response save(@NotNull final Infrastructure infrastructure) {
 
-        String savedEntityId = this.service.save(infrastructure);
+        UUID savedEntityId = this.service.save(infrastructure);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +56,7 @@ public class InfrastructureEndpoint implements GenericEndpoint<Infrastructure> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final String id) {
+    public Response getById(@NotNull @PathParam("id") final UUID id) {
 
         try {
             final Infrastructure infrastructure = this.service.find(id);
@@ -69,7 +70,7 @@ public class InfrastructureEndpoint implements GenericEndpoint<Infrastructure> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Infrastructure entity) {
+    public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Infrastructure entity) {
 
         try {
             Infrastructure entityUpdated = this.service.update(entity);

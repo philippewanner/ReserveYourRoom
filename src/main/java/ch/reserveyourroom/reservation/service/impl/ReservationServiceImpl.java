@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class ReservationServiceImpl implements ReservationService {
@@ -32,7 +33,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Inject
     private ReservationDao reservationDao;
 
-    public Reservation find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Reservation find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Reservation> entity = this.reservationDao.read(key);
         if (entity.isPresent()) {
@@ -42,7 +43,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
-    public Optional<Reservation> search(@NotNull String key) {
+    public Optional<Reservation> search(@NotNull UUID key) {
 
         return this.reservationDao.read(key);
     }
@@ -52,7 +53,7 @@ public class ReservationServiceImpl implements ReservationService {
         return this.reservationDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Reservation reservation) {
+    public UUID save(@NotNull @Valid Reservation reservation) {
 
         return this.reservationDao.create(reservation);
     }
@@ -67,7 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Reservation> t = this.reservationDao.read(id);
         if(t.isPresent()){

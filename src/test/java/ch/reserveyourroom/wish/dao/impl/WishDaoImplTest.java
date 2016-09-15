@@ -42,6 +42,7 @@ public class WishDaoImplTest extends TestCase{
     private UserDao userDao = new UserDaoImpl();
     private RoomDao roomDao = new RoomDaoImpl();
     private BuildingDao buildingDao = new BuildingDaoImpl();
+    private AddressDao addressDao = new AddressDaoImpl();
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
@@ -71,6 +72,7 @@ public class WishDaoImplTest extends TestCase{
         userDao.setEntityManager(em);
         roomDao.setEntityManager(em);
         buildingDao.setEntityManager(em);
+        addressDao.setEntityManager(em);
 
         em.getTransaction().begin();
 
@@ -79,7 +81,7 @@ public class WishDaoImplTest extends TestCase{
         user.setEmail("email");
         user.setFirstname("firstname");
         user.setLastname("lastname");
-        userDao.create(user);
+        UUID userId = userDao.create(user);
 
         // Create a building's address
         Address a1 = new Address();
@@ -89,6 +91,14 @@ public class WishDaoImplTest extends TestCase{
         a1.setState("state");
         a1.setStreet("street");
         a1.setZipcode("1964");
+        UUID addressId = addressDao.create(a1);
+
+
+        // Create the building
+        building = new Building();
+        building.setAddressId(addressId);
+        building.setName("b");
+        UUID buildingId = buildingDao.create(building);
 
         // Create a building's room
         room = new Room();
@@ -96,16 +106,8 @@ public class WishDaoImplTest extends TestCase{
         room.setName("r");
         room.setSeatnumber(23);
         room.setSize(67f);
-
-        // Create the building
-        building = new Building();
-        building.setAddress(a1);
-        building.setName("b");
-        Set<Room> rooms = new TreeSet<>();
-        rooms.add(room);
-        building.setRooms(rooms);
-
-        buildingDao.create(building);
+        room.setBuildingId(buildingId);
+        UUID roomId = roomDao.create(room);
     }
 
     @After
@@ -138,11 +140,11 @@ public class WishDaoImplTest extends TestCase{
         // Given
 
         // When
-        final String objectId = createSampleWishInDb(1).get(0);
+        final UUID objectId = createSampleWishInDb(1).get(0);
 
         // Then
         Wish objectRead = wishDao.read(objectId).get();
-        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid().toString()) == 0);
+        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid()) == 0);
     }
 
     @Test
@@ -163,7 +165,7 @@ public class WishDaoImplTest extends TestCase{
     public void should_deleteObjectFromDb() {
 
         // Given
-        String pk = this.createSampleWishInDb(1).get(0);
+        UUID pk = this.createSampleWishInDb(1).get(0);
         Optional<Wish> objectFound = wishDao.read(pk);
 
         // When
@@ -177,7 +179,7 @@ public class WishDaoImplTest extends TestCase{
     public void should_updateObjectFromDb() {
 
         // Given
-        String pk = this.createSampleWishInDb(1).get(0);
+        UUID pk = this.createSampleWishInDb(1).get(0);
         Optional<Wish> objectFound = wishDao.read(pk);
         LocalDate end = LocalDate.now();
 
@@ -197,7 +199,7 @@ public class WishDaoImplTest extends TestCase{
     public void should_readObjectFromDb() {
 
         // Given
-        String pk = this.createSampleWishInDb(1).get(0);
+        UUID pk = this.createSampleWishInDb(1).get(0);
 
         // When
         Optional<Wish> objectFound = wishDao.read(pk);
@@ -206,19 +208,17 @@ public class WishDaoImplTest extends TestCase{
         assertTrue("The system cannot read the object from DB", objectFound.isPresent());
     }
 
-    private List<String> createSampleWishInDb(int numberOfObject){
+    private List<UUID> createSampleWishInDb(int numberOfObject){
 
-        List<String> ids = new ArrayList<>();
+        List<UUID> ids = new ArrayList<>();
 
         for(int i=0; i<numberOfObject; i++) {
 
             Wish w1 = new Wish();
-            w1.setStart(Date.valueOf(LocalDate.of(2016, Month.JANUARY, 01)));
+            w1.setStart(Date.valueOf(LocalDate.of(2016, Month.JANUARY, 1)));
             w1.setEnd(Date.valueOf(LocalDate.of(2016, Month.APRIL, 20)));
-            w1.setRoom(room);
-            w1.setUser(user);
 
-            String id = wishDao.create(w1);
+            UUID id = wishDao.create(w1);
             ids.add(id);
         }
 

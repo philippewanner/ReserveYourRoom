@@ -1,13 +1,12 @@
 package ch.reserveyourroom.reservation.model;
 
 import ch.reserveyourroom.common.model.AbstractEntity;
-import ch.reserveyourroom.room.model.Room;
-import ch.reserveyourroom.user.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Entity that represent a reservation model.
@@ -27,14 +26,12 @@ public class Reservation extends AbstractEntity {
     private Date end;
 
     @NotNull
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ROOM_ID", nullable = false)
-    private Room room;
+    @Column(name = "ROOM_ID", nullable = false)
+    private UUID roomId;
 
     @NotNull
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private User user;
+    @Column(name = "USER_ID", nullable = false)
+    private UUID userId;
 
     @Override
     public String toString() {
@@ -46,10 +43,9 @@ public class Reservation extends AbstractEntity {
     public int hashCode() {
 
         int hash = 1;
-        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
         hash = hash * 13 + (start != null ? start.hashCode() : 0);
         hash = hash * 7 + (end != null ? end.hashCode() : 0);
-        hash = hash * 5 + (room != null ? room.hashCode() : 0);
+        hash = hash * 5 + (roomId != null ? roomId.hashCode() : 0);
         return hash;
     }
 
@@ -59,7 +55,9 @@ public class Reservation extends AbstractEntity {
         if (!(o instanceof Reservation)) return false;
 
         Reservation other = (Reservation) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
+        return  (this.start != null && this.start.equals(other.start)) &&
+                (this.end != null && this.end.equals(other.end)) &&
+                (this.roomId != null && this.roomId.equals(other.roomId));
 
     }
 
@@ -79,19 +77,19 @@ public class Reservation extends AbstractEntity {
         this.end = end;
     }
 
-    public Room getRoom(){
-        return this.room;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setUserId(UUID user) {
+        this.userId = user;
     }
 
-    public User getUser() {
-        return user;
+    public UUID getRoomId(){
+        return this.roomId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setRoomId(UUID room) {
+        this.roomId = room;
     }
 }

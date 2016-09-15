@@ -16,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Wish Endpoint
@@ -42,7 +43,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
     @POST
     public Response save(@NotNull final Wish wish) {
 
-        String savedEntityId = this.service.save(wish);
+        UUID savedEntityId = this.service.save(wish);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +56,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final String id) {
+    public Response getById(@NotNull @PathParam("id") final UUID id) {
 
         try {
             final Wish wish = this.service.find(id);
@@ -69,7 +70,7 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Wish entity) {
+    public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Wish entity) {
 
         try {
             Wish entityUpdated = this.service.update(entity);

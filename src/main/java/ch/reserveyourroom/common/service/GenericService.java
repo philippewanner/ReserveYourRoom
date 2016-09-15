@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Interface that defines the CRUD operations that can perform each service.
@@ -22,7 +23,7 @@ public interface GenericService<T extends AbstractEntity> {
      * @param key Id of the <T> to find
      * @return return the found T, otherwise throws an EntityNotFoundException.
      */
-    T find(@NotNull String key) throws BusinessUnprocessableOperationException;
+    T find(@NotNull UUID key) throws BusinessUnprocessableOperationException;
 
     /**
      * Search a <T> corresponding to the given id.
@@ -30,7 +31,7 @@ public interface GenericService<T extends AbstractEntity> {
      * @param key Id of the <T> to search
      * @return return the found T, or an empty Optional if not found.
      */
-    Optional<T> search(@NotNull String key);
+    Optional<T> search(@NotNull UUID key);
 
     /**
      * Load all entity <T>
@@ -45,7 +46,7 @@ public interface GenericService<T extends AbstractEntity> {
      * @param t the <T> to save.
      * @return the persisted <T>.
      */
-    String save(@NotNull @Valid T t);
+    UUID save(@NotNull @Valid T t);
 
     /**
      * Update a <T>.
@@ -59,5 +60,5 @@ public interface GenericService<T extends AbstractEntity> {
     /**
      * Deletes a <T>
      */
-    void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException;
+    void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException;
 }

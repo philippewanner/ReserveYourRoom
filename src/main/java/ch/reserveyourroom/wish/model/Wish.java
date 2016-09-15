@@ -12,9 +12,11 @@ import org.hibernate.annotations.FetchMode;
 import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Entity that represent a whish model.
@@ -33,24 +35,21 @@ public class Wish extends AbstractEntity implements Comparable<Wish> {
     @Column(name = "WHISH_END", nullable = false)
     private Date end;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="WISHED_ROOM",referencedColumnName="ROOM_ID", nullable = false)
-    private Room room;
+    @Nullable
+    @Column(name = "ROOM_ID", nullable = true)
+    private UUID roomId;
 
-    @NotNull
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private User user;
+    @Nullable
+    @Column(name = "USER_ID", nullable = true)
+    private UUID userId;
 
     @Override
     public int hashCode() {
 
         int hash = 1;
-        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
         hash = hash * 13 + (start != null ? start.hashCode() : 0);
         hash = hash * 7 + (end != null ? end.hashCode() : 0);
-        hash = hash * 13 + (room != null ? room.hashCode() : 0);
+        hash = hash * 13 + (roomId != null ? roomId.hashCode() : 0);
         return hash;
     }
 
@@ -60,7 +59,9 @@ public class Wish extends AbstractEntity implements Comparable<Wish> {
         if (!(o instanceof Wish)) return false;
 
         Wish other = (Wish) o;
-        return Objects.equals(this.getUuid(), other.getUuid()) && (this.start != null && this.start.equals(other.start)) && (this.end != null && this.end.equals(other.end)) && this.room != null && this.room.equals(other.room);
+        return  (this.start != null && this.start.equals(other.start)) &&
+                (this.end != null && this.end.equals(other.end)) &&
+                (this.roomId != null && this.roomId.equals(other.roomId));
 
     }
 
@@ -86,14 +87,6 @@ public class Wish extends AbstractEntity implements Comparable<Wish> {
         return this.end;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
     @Override
     public int compareTo(Wish o) {
         final int BEFORE = -1;
@@ -111,11 +104,19 @@ public class Wish extends AbstractEntity implements Comparable<Wish> {
         return EQUAL;
     }
 
-    public User getUser() {
-        return user;
+    public UUID getRoomId() {
+        return roomId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setRoomId(UUID roomId) {
+        this.roomId = roomId;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 }

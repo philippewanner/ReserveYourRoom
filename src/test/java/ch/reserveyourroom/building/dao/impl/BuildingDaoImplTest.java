@@ -1,9 +1,13 @@
 package ch.reserveyourroom.building.dao.impl;
 
+import ch.reserveyourroom.address.dao.AddressDao;
+import ch.reserveyourroom.address.dao.impl.AddressDaoImpl;
 import ch.reserveyourroom.address.model.Address;
 import ch.reserveyourroom.building.dao.BuildingDao;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
+import ch.reserveyourroom.room.dao.RoomDao;
+import ch.reserveyourroom.room.dao.impl.RoomDaoImpl;
 import ch.reserveyourroom.room.model.Room;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -23,7 +27,10 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class BuildingDaoImplTest {
 
+
     private BuildingDao buildingDao = new BuildingDaoImpl();
+    private RoomDao roomDao = new RoomDaoImpl();
+    private AddressDao addressDao = new AddressDaoImpl();
 
     protected static EntityManagerFactory emf;
     protected EntityManager em;
@@ -46,6 +53,8 @@ public class BuildingDaoImplTest {
         em = emf.createEntityManager();
 
         buildingDao.setEntityManager(em);
+        addressDao.setEntityManager(em);
+        roomDao.setEntityManager(em);
 
         em.getTransaction().begin();
     }
@@ -66,7 +75,7 @@ public class BuildingDaoImplTest {
         // Given
         int nbObjectToCreate = 2;
         for(int i=0; i<nbObjectToCreate; i++) {
-            createSampleBuildingInDb();
+            createSampleBuildingInDb(""+i);
         }
 
         // When
@@ -82,11 +91,11 @@ public class BuildingDaoImplTest {
         // Given
 
         // When
-        final String objectId = createSampleBuildingInDb();
+        final UUID objectId = createSampleBuildingInDb("");
 
         // Then
         Building objectRead = buildingDao.read(objectId).get();
-        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid().toString()) == 0);
+        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid()) == 0);
     }
 
     @Test
@@ -95,7 +104,7 @@ public class BuildingDaoImplTest {
         // Given
         int nbObjectToCreate = 5;
         for(int i=0; i<nbObjectToCreate; i++){
-            this.createSampleBuildingInDb();
+            this.createSampleBuildingInDb("");
         }
 
         // When
@@ -109,7 +118,7 @@ public class BuildingDaoImplTest {
     public void should_deleteObjectFromDb() {
 
         // Given
-        String pk = this.createSampleBuildingInDb();
+        UUID pk = this.createSampleBuildingInDb("");
         Optional<Building> objectFound = buildingDao.read(pk);
 
         // When
@@ -123,7 +132,7 @@ public class BuildingDaoImplTest {
     public void should_updateObjectFromDb() {
 
         // Given
-        String pk = this.createSampleBuildingInDb();
+        UUID pk = this.createSampleBuildingInDb("");
         Optional<Building> objectFound = buildingDao.read(pk);
         String newBuildingName = "newBuildingName";
 
@@ -143,7 +152,7 @@ public class BuildingDaoImplTest {
     public void should_readObjectFromDb() {
 
         // Given
-        String pk = this.createSampleBuildingInDb();
+        UUID pk = this.createSampleBuildingInDb("");
 
         // When
         Optional<Building> objectFound = buildingDao.read(pk);
@@ -152,7 +161,7 @@ public class BuildingDaoImplTest {
         assertTrue("The system cannot read the object from DB", objectFound.isPresent());
     }
 
-    private String createSampleBuildingInDb(){
+    private UUID createSampleBuildingInDb(String buildingName){
 
         Address a1 = new Address();
         a1.setCity("city");
@@ -161,23 +170,24 @@ public class BuildingDaoImplTest {
         a1.setState("state");
         a1.setStreet("street");
         a1.setZipcode("1964");
+        UUID addressId = addressDao.create(a1);
 
-        final Set<Room> rooms = new TreeSet<>();
-        final int nbRoomToCreate = 0;
+        Building b = new Building();
+        b.setAddressId(addressId);
+        b.setName("name"+buildingName);
+        UUID buildingId = buildingDao.create(b);
+
+        final int nbRoomToCreate = 4;
         for(int i=0; i<nbRoomToCreate; i++){
             Room r = new Room();
             r.setFloor(2);
-            r.setName("room"+i);
+            r.setName("room"+i+buildingName);
             r.setSeatnumber(i*10);
             r.setSize((float)(i*i));
-            rooms.add(r);
+            r.setBuildingId(buildingId);
+            roomDao.create(r);
         }
 
-        Building b = new Building();
-        b.setAddress(a1);
-        b.setName("name");
-        b.setRooms(rooms);
-
-        return buildingDao.create(b);
+        return buildingId;
     }
 }

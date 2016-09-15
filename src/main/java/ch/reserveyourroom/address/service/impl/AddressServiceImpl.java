@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Stateless
 public class AddressServiceImpl implements AddressService {
@@ -26,7 +27,7 @@ public class AddressServiceImpl implements AddressService {
     @Inject
     private AddressDao addressDao;
 
-    public Address find(@NotNull String key) throws BusinessUnprocessableOperationException {
+    public Address find(@NotNull UUID key) throws BusinessUnprocessableOperationException {
 
         Optional<Address> entity = this.addressDao.read(key);
         if (entity.isPresent()) {
@@ -36,7 +37,7 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-    public Optional<Address> search(@NotNull String key) {
+    public Optional<Address> search(@NotNull UUID key) {
 
         return this.addressDao.read(key);
     }
@@ -46,7 +47,7 @@ public class AddressServiceImpl implements AddressService {
         return this.addressDao.loadAll();
     }
 
-    public String save(@NotNull @Valid Address address) {
+    public UUID save(@NotNull @Valid Address address) {
 
         return this.addressDao.create(address);
     }
@@ -61,7 +62,7 @@ public class AddressServiceImpl implements AddressService {
 
     }
 
-    public void delete(@NotEmpty String id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Address> t = this.addressDao.read(id);
         if(t.isPresent()){

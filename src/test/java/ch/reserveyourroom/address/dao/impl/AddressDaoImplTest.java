@@ -16,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -85,11 +86,11 @@ public class AddressDaoImplTest {
         // Given
 
         // When
-        final String objectId = createSampleAddressInDb();
+        final UUID objectId = createSampleAddressInDb();
 
         // Then
         Address objectRead = addressDao.read(objectId).get();
-        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid().toString()) == 0);
+        assertTrue("The Id of the object can not be read", objectId.compareTo(objectRead.getUuid()) == 0);
     }
 
     @Test
@@ -112,7 +113,7 @@ public class AddressDaoImplTest {
     public void should_deleteObjectFromDb() {
 
         // Given
-        String pk = this.createSampleAddressInDb();
+        UUID pk = this.createSampleAddressInDb();
         Optional<Address> objectFound = addressDao.read(pk);
 
         // When
@@ -126,7 +127,7 @@ public class AddressDaoImplTest {
     public void should_updateObjectFromDb() {
 
         // Given
-        String pk = this.createSampleAddressInDb();
+        UUID pk = this.createSampleAddressInDb();
         Optional<Address> objectFound = addressDao.read(pk);
         String newCity = "newCity";
 
@@ -146,7 +147,7 @@ public class AddressDaoImplTest {
     public void should_readObjectFromDb() {
 
         // Given
-        String pk = this.createSampleAddressInDb();
+        UUID pk = this.createSampleAddressInDb();
 
         // When
         Optional<Address> objectFound = addressDao.read(pk);
@@ -155,7 +156,7 @@ public class AddressDaoImplTest {
         assertTrue("The system cannot read the object from DB", objectFound.isPresent());
     }
 
-    private String createSampleAddressInDb(){
+    private UUID createSampleAddressInDb(){
 
             Address a1 = new Address();
             a1.setCity("city");

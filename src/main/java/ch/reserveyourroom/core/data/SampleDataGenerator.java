@@ -1,12 +1,14 @@
 package ch.reserveyourroom.core.data;
 
 import ch.reserveyourroom.address.model.Address;
+import ch.reserveyourroom.address.service.AddressService;
 import ch.reserveyourroom.building.dao.BuildingDao;
 import ch.reserveyourroom.building.model.Building;
 import ch.reserveyourroom.building.service.BuildingService;
 import ch.reserveyourroom.common.exception.persistence.EntityOptimisticLockException;
 import ch.reserveyourroom.common.exception.persistence.PersistenceException;
 import ch.reserveyourroom.infrastructure.model.Infrastructure;
+import ch.reserveyourroom.infrastructure.service.InfrastructureService;
 import ch.reserveyourroom.room.dao.RoomDao;
 import ch.reserveyourroom.room.model.Room;
 import ch.reserveyourroom.room.service.RoomService;
@@ -36,6 +38,9 @@ public class SampleDataGenerator {
     private Logger logger;
 
     @Inject
+    private AddressService addressService;
+
+    @Inject
     private UserService userService;
 
     @Inject
@@ -43,6 +48,9 @@ public class SampleDataGenerator {
 
     @Inject
     private RoomService roomService;
+
+    @Inject
+    private InfrastructureService infrastructureService;
 
     private static SampleDataGenerator instance;
 
@@ -96,40 +104,38 @@ public class SampleDataGenerator {
             Fairy fairy = Fairy.create();
 
             // Building address
-            Address addressBuilding = new Address();
-            addressBuilding.setCity(fairy.person().getAddress().getCity());
-            addressBuilding.setCountry("Switzerland");
-            addressBuilding.setHousenumber(""+i%12+1);
-            addressBuilding.setState("");
-            addressBuilding.setStreet(fairy.person().getAddress().street());
-            addressBuilding.setZipcode(fairy.person().getAddress().getPostalCode());
+            Address address = new Address();
+            address.setCity(fairy.person().getAddress().getCity());
+            address.setCountry("Switzerland");
+            address.setHousenumber(""+i%12+1);
+            address.setState("");
+            address.setStreet(fairy.person().getAddress().street());
+            address.setZipcode(fairy.person().getAddress().getPostalCode());
+            UUID addressId = addressService.save(address);
+
 
             // Building setters
             Building building = new Building();
-            building.setAddress(addressBuilding);
+            building.setAddressId(addressId);
             building.setName(fairy.company().name());
+            UUID buildingId = buildingService.save(building);
 
             // Building rooms
-            Set<Room> rooms = new TreeSet<>();
             for(int j=0; j<10; j++){
                 Room room = new Room();
                 room.setFloor(i%4+j);
                 room.setName("B"+i+"-Room"+j);
                 room.setSeatnumber(j%5+14+i);
                 room.setSize((float)(40+i*1.2+j*0.2));
-                room.setBuilding(building);
+                room.setBuildingId(buildingId);
+                UUID roomId = roomService.save(room);
 
                 Infrastructure infrastructure = new Infrastructure();
                 infrastructure.setName("infra-"+i+j);
-                Set<Infrastructure> infrastructures = new TreeSet<>();
-                infrastructures.add(infrastructure);
-                infrastructure.setRoom(room);
-                room.setInfrastructures(infrastructures);
-
-                rooms.add(room);
+                infrastructure.setRoomId(roomId);
+                infrastructureService.save(infrastructure);
             }
 
-            building.setRooms(rooms);
             buildingService.save(building);
         }
     }

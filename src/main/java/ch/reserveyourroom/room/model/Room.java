@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Entity that represent a room model.
@@ -37,13 +38,8 @@ public class Room extends AbstractEntity implements Comparable<Room> {
     private Integer floor;
 
     @Nullable
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
-    private Set<Infrastructure> infrastructures;
-
-    @Nullable
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BUILDING_ID", nullable = true)
-    private Building building;
+    @Column(name = "BUILDING_ID", nullable = true)
+    private UUID buildingId;
 
     @Override
     public String toString() {
@@ -84,25 +80,14 @@ public class Room extends AbstractEntity implements Comparable<Room> {
         this.floor = floor;
     }
 
-    @Nullable
-    public Set<Infrastructure> getInfrastructures() {
-        return infrastructures;
-    }
-
-    public void setInfrastructures(@Nullable Set<Infrastructure> infrastructures) {
-        this.infrastructures = infrastructures;
-    }
-
     @Override
     public int hashCode() {
 
         int hash = 1;
-        hash = hash * 3 + (getUuid() != null ? getUuid().hashCode() : 0);
         hash = hash * 13 + (name != null ? name.hashCode() : 0);
         hash = hash * 7 + (size != null ? size.hashCode() : 0);
         hash = hash * 5 + (seatnumber != null ? seatnumber.hashCode() : 0);
         hash = hash * 13 + (floor != null ? floor.hashCode() : 0);
-        hash = hash * 3 + (infrastructures != null ? infrastructures.hashCode() : 0);
         return hash;
     }
 
@@ -121,15 +106,16 @@ public class Room extends AbstractEntity implements Comparable<Room> {
     }
 
     @Override
-    public int compareTo(Room o) {
+    public int compareTo(@NotNull Room o) {
         return this.name.compareTo(o.name);
     }
 
-    public Building getBuilding() {
-        return building;
+    @Nullable
+    public UUID getBuildingId() {
+        return buildingId;
     }
 
-    public void setBuilding(Building building) {
-        this.building = building;
+    public void setBuildingId(@Nullable UUID buildingId) {
+        this.buildingId = buildingId;
     }
 }

@@ -16,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Building Endpoint
@@ -42,7 +43,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
     @POST
     public Response save(@NotNull final Building building) {
 
-        String savedEntityId = this.service.save(building);
+        UUID savedEntityId = this.service.save(building);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -55,7 +56,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
 
     @GET
     @Path("/{id}")
-    public Response getById(@NotNull @PathParam("id") final String id) {
+    public Response getById(@NotNull @PathParam("id") final UUID id) {
 
         try {
             final Building building = this.service.find(id);
@@ -69,7 +70,7 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
 
     @PUT
     @Path("/{id}")
-    public Response updateById(@NotNull @PathParam("id") final String id, @NotNull final Building entity) {
+    public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Building entity) {
 
         try {
             Building entityUpdated = this.service.update(entity);
