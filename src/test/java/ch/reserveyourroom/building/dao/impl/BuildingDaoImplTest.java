@@ -104,7 +104,7 @@ public class BuildingDaoImplTest {
         // Given
         int nbObjectToCreate = 5;
         for(int i=0; i<nbObjectToCreate; i++){
-            this.createSampleBuildingInDb("");
+            this.createSampleBuildingInDb(""+i);
         }
 
         // When
