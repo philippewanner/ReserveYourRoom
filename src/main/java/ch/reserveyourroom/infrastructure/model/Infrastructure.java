@@ -29,7 +29,7 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
     @Override
     public String toString() {
 
-        return "Infrastructure [id=" + getUuid() + "]";
+        return "Infrastructure [id=" + getUuid() + ", " + name + "]";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Infrastructure extends AbstractEntity implements Comparable<Infrast
         if(!(o instanceof Infrastructure)) return false;
 
         Infrastructure other = (Infrastructure) o;
-        return Objects.equals(this.getUuid(), other.getUuid());
+        return Objects.equals(this.getName(), other.getName());
 
     }
 
