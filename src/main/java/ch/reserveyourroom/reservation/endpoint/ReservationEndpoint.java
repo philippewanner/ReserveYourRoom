@@ -5,8 +5,10 @@ import ch.reserveyourroom.common.endpoint.ResponseFactory;
 import ch.reserveyourroom.common.endpoint.Routes;
 import ch.reserveyourroom.common.exception.business.BusinessOperation;
 import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperationException;
+import ch.reserveyourroom.common.mail.Mailservice;
 import ch.reserveyourroom.reservation.model.Reservation;
 import ch.reserveyourroom.reservation.service.ReservationService;
+import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +49,15 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
 
         logger.info("Room id: "+ reservation.getUuid() + " saved");
         UUID savedEntityId = this.service.save(reservation);
+
+        //send a mail to the user
+        try {
+            Mailservice.sendMail("danijel.brei@students.bfh.ch", "Reservation confirmation", "reservation for room "+ reservation.getRoomId() +" has been created.");
+        } catch(EmailException emx)
+        {
+            System.out.printf("Exception during save-prozess. Exception-msg: %s", emx.getMessage());
+        }
+
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
     }
 
@@ -58,6 +69,15 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
         try {
             this.service.delete(id);
             logger.info("Room id: "+ id + " deleted");
+
+            //send a mail to the user
+            try {
+                Mailservice.sendMail("danijel.brei@students.bfh.ch", "Reservation canceled", "reservation has been canceled.");
+            } catch(EmailException emx)
+            {
+                System.out.printf("Exception during delete-process. Exception-msg: %s", emx.getMessage());
+            }
+
             return ResponseFactory.buildSuccessResponse(BusinessOperation.DELETE);
         } catch (BusinessUnprocessableOperationException e) {
             logger.error("Error when deleting room id: "+ id);

@@ -5,6 +5,7 @@ ch/reserveyourroom/building/model/Building.class
 ch/reserveyourroom/room/service/impl/RoomServiceImpl.class
 ch/reserveyourroom/room/dao/impl/RoomDaoImpl.class
 ch/reserveyourroom/address/dao/impl/AddressDaoImpl.class
+ch/reserveyourroom/common/mail/Mailservice.class
 ch/reserveyourroom/common/exception/persistence/EntityUnprocessableException.class
 ch/reserveyourroom/common/exception/business/BusinessOperation.class
 ch/reserveyourroom/reservation/dao/ReservationDao.class

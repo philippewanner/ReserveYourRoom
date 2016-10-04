@@ -25,6 +25,7 @@
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/room/dao/RoomDao.java
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/common/exception/business/BusinessOperation.java
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/room/endpoint/RoomEndpoint.java
+/Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/common/mail/Mailservice.java
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/address/dao/AddressDao.java
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/common/exception/business/BusinessUnprocessableOperationException.java
 /Users/philippe.wanner/IdeaProjects/ReserveYourRoom/src/main/java/ch/reserveyourroom/wish/model/Wish.java

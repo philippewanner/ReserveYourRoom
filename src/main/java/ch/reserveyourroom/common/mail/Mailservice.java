@@ -13,7 +13,7 @@ public class Mailservice {
     private static final String SMTP_HOST = "mail.gmx.net";
     private static final int SMTP_PORT = 587;
 
-    private static final String USERNAME = "d.brei@gmx.ch";
+    private static final String USERNAME = "";
     private static final String PASSWORD = "";
 
     public static void sendMail(String recipient,
