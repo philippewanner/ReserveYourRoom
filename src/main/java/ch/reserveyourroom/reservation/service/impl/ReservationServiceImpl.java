@@ -68,9 +68,16 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
-        Optional<Reservation> t = this.reservationDao.read(id);
+        List<Reservation> reservations = this.reservationDao.loadAll();
+        Optional<Reservation> t = null;
+        for(Reservation r : reservations){
+            if(r.getUuid().equals(id)){
+                t = Optional.ofNullable(r);
+            }
+        }
+        //Optional<Reservation> t = this.reservationDao.read(id);
         if(t.isPresent()){
             this.reservationDao.delete(t.get().getUuid());
         } else {

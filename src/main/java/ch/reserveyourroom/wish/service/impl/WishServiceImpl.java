@@ -62,7 +62,7 @@ public class WishServiceImpl implements WishService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Wish> t = this.wishDao.read(id);
         if(t.isPresent()){

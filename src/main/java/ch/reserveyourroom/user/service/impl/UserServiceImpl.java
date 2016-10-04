@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<User> t = this.userDao.read(id);
         if(t.isPresent()){

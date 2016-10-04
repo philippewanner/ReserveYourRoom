@@ -68,7 +68,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Building> t = this.buildingDao.read(id);
         if(t.isPresent()){

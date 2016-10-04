@@ -68,6 +68,11 @@ public class BuildingEndpoint implements GenericEndpoint<Building> {
         }
     }
 
+    @Override
+    public Response delete(@NotNull UUID id) {
+        return null;
+    }
+
     @PUT
     @Path("/{id}")
     public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Building entity) {

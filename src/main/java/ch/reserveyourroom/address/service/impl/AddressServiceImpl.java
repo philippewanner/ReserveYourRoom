@@ -62,7 +62,7 @@ public class AddressServiceImpl implements AddressService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Address> t = this.addressDao.read(id);
         if(t.isPresent()){

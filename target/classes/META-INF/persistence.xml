@@ -1,0 +1,16 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="myPersistenceUnit" transaction-type="JTA">
+
+        <!-- Data source config -->
+        <jta-data-source>java:/MySqlDS</jta-data-source>
+
+        <properties>
+            <!-- Automatically validates or exports schema DDL to the database when the SessionFactory is created -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

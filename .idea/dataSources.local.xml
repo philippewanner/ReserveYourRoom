@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - reserveyourroomdb@localhost" uuid="5cc195fc-00f4-4ae3-a3ff-830132b65628">
+      <secret-storage>memory</secret-storage>
+      <user-name>root</user-name>
+    </data-source>
+  </component>
+</project>

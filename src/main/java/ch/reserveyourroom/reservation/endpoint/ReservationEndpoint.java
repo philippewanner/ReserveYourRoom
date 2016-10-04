@@ -8,6 +8,7 @@ import ch.reserveyourroom.common.exception.business.BusinessUnprocessableOperati
 import ch.reserveyourroom.reservation.model.Reservation;
 import ch.reserveyourroom.reservation.service.ReservationService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -30,8 +31,7 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
     @Inject
     private ReservationService service;
 
-    @Inject
-    private Logger log;
+    private Logger logger = LoggerFactory.getLogger(ReservationEndpoint.class);
 
     @GET
     @Path(Routes.PING)
@@ -41,10 +41,30 @@ public class ReservationEndpoint implements GenericEndpoint<Reservation> {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response save(@NotNull final Reservation reservation) {
 
+        logger.info("Room id: "+ reservation.getUuid() + " saved");
         UUID savedEntityId = this.service.save(reservation);
         return ResponseFactory.buildSuccessResponse(BusinessOperation.SAVE, savedEntityId);
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/remove/{id}")
+    public Response delete(@PathParam("id") final UUID id) {
+        try {
+            this.service.delete(id);
+            logger.info("Room id: "+ id + " deleted");
+            return ResponseFactory.buildSuccessResponse(BusinessOperation.DELETE);
+        } catch (BusinessUnprocessableOperationException e) {
+            logger.error("Error when deleting room id: "+ id);
+            return ResponseFactory.buildClientErrorResponse(e);
+        } finally {
+            logger.info("Operation delete end");
+        }
     }
 
     @GET

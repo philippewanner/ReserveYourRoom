@@ -62,7 +62,7 @@ public class InfrastructureServiceImpl implements InfrastructureService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Infrastructure> t = this.infrastructureDao.read(id);
         if(t.isPresent()){

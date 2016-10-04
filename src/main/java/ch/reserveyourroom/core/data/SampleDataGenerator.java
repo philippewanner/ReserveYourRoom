@@ -153,8 +153,6 @@ public class SampleDataGenerator {
                         reservation.setStart(new Date(3, 3, 2000));
                         reservation.setEnd(new Date(4, 4, 2010));
                         reservationService.save(reservation);
-
-
                     }
                 }
             }

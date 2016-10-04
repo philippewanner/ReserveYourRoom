@@ -68,6 +68,11 @@ public class WishEndpoint implements GenericEndpoint<Wish> {
         }
     }
 
+    @Override
+    public Response delete(@NotNull UUID id) {
+        return null;
+    }
+
     @PUT
     @Path("/{id}")
     public Response updateById(@NotNull @PathParam("id") final UUID id, @NotNull final Wish entity) {

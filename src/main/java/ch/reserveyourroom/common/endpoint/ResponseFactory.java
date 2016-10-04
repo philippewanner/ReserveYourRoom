@@ -34,7 +34,8 @@ public final class ResponseFactory {
 
         HttpStatusCode status = getSuccessResponse(op);
 
-        return Response.status(status.getStatusCode()).build();
+        Response response =  Response.status(status.getStatusCode()).build();
+        return response;
     }
 
     public static Response buildSuccessResponse(BusinessOperation op, AbstractEntity entity) {

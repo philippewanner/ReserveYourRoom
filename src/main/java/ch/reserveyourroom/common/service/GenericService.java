@@ -60,5 +60,5 @@ public interface GenericService<T extends AbstractEntity> {
     /**
      * Deletes a <T>
      */
-    void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException;
+    void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException;
 }

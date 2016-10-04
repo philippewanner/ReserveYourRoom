@@ -1,0 +1,7 @@
+ch/reserveyourroom/building/dao/impl/BuildingDaoImplTest.class
+ch/reserveyourroom/wish/dao/impl/WishDaoImplTest.class
+ch/reserveyourroom/address/dao/impl/AddressDaoImplTest.class
+ch/reserveyourroom/util/PersistenceHelper.class
+ch/reserveyourroom/user/dao/impl/UserDaoImplTest.class
+ch/reserveyourroom/room/dao/impl/RoomDaoImplTest.class
+ch/reserveyourroom/reservation/dao/impl/ReservationDaoImplTest.class

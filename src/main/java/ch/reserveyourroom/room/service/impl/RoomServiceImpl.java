@@ -62,7 +62,7 @@ public class RoomServiceImpl implements RoomService {
 
     }
 
-    public void delete(@NotEmpty UUID id) throws BusinessUnprocessableOperationException {
+    public void delete(@NotNull UUID id) throws BusinessUnprocessableOperationException {
 
         Optional<Room> t = this.roomDao.read(id);
         if(t.isPresent()){
